@@ -1,11 +1,12 @@
-#include <plotcpp/plotcpp.hpp>
+#include <plotcpp/plotwidget.hpp>
 
 #include <vector>
 #include <cmath>
 
-int main(int argc, char** argv) {
+#include <QApplication>
 
-	sch::Figure f{argc, argv, 2, 2};
+int main(int argc, char** argv) {
+	QApplication app{argc, argv};
 
 	std::vector<double> x, y;
 	double pi = std::atan(1)*4;
@@ -16,36 +17,25 @@ int main(int argc, char** argv) {
 		y.push_back(std::sin(2*pi*f0*t));
 	}
 
-	f.title("Title");
-	f.xlabel("x 1");
-	f.ylabel("y 1");
-	f.plot(x, y, "sin");
-	f.range({0, 1, -1.1, 1.1});
-	f.legend();
-	/* f.hist(x, y, "legend 1"); */
+	pcpp::PlotWidget window{1, 1};
 
-	f.at(0, 1);
-	f.plot(x, y, "legend 2");
-	f.title("Title 2");
-	f.xlabel("x 2");
-	f.ylabel("y 2");
-	f.range({0, 1, -1, 1});
-	f.legend();
-	f.clear();
+	window.title("Title");
+	window.xlabel("x 1");
+	window.ylabel("y 1");
+	window.range({0, 1, -1.1, 1.1});
+	window.legend();
 
-	f.at(1, 0);
-	f.plot(x, y, "legend 3");
-	f.title("Title 3");
-	f.xlabel("x 3");
-	f.ylabel("y 3");
-	f.range({0, 1, -1, 1});
+	auto plot = window.plot(x, y, "Plot");
+	plot.color(127, 54, 32);
+	/* plot.line_style(pcpp::Style::cross); */
+	/* auto hist = window.hist(x, y, "Histogram"); */
 
-	f.at(1, 1);
-	f.plot(x, y, "legend 4");
-	f.title("Title 4");
-	f.xlabel("x 4");
-	f.ylabel("y 4");
-	f.range({0, 1, -1, 1});
-
-	return f.show();
+	window.show();
+	return app.exec();
 }
+
+
+	/* pcpp::figure f{argc, argv, 2, 2}; */
+
+
+	/* return f.show(); */

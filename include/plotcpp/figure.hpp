@@ -7,6 +7,8 @@
 #include <iostream>
 #include <memory>
 
+#include <plotcpp/utils.hpp>
+
 /*
  * TODO
  * new graph at each plot... bad for animation -> clear should remove them ?
@@ -14,13 +16,7 @@
  * so that you can modify the plot's options and replot after a plot.
  */
 
-class QCustomPlot;
-class QCPAxisRect;
-class QCPAbstractPlottable;
-class QCPLayoutGrid;
-class QApplication;
-
-namespace sch {
+namespace pcpp {
 
 	struct Rect {
 		double xmin, xmax, ymin, ymax;
@@ -32,7 +28,7 @@ namespace sch {
 		Color(unsigned char,unsigned char,unsigned char);
 	};
 
-	class Figure {
+	class figure {
 		private:
 			using Plot = std::shared_ptr<QCustomPlot*>;
 			int           _argc;
@@ -45,9 +41,9 @@ namespace sch {
 			std::map<QCPAbstractPlottable*,std::string> _plots;
 
 		public:
-			Figure(int,char**,std::size_t=1,std::size_t=1);
-			Figure(const Figure&) = delete;
-			void operator=(const Figure&) = delete;
+			figure(int,char**,std::size_t=1,std::size_t=1);
+			figure(const figure&) = delete;
+			void operator=(const figure&) = delete;
 
 			void plot(
 				const std::vector<double>&,
@@ -72,7 +68,7 @@ namespace sch {
 				const std::string& label=""
 			);
 
-			void range(const Rect&);
+			void range(const range&);
 			void at(std::size_t, std::size_t);
 			void title (const std::string&);
 			void xlabel(const std::string&);
@@ -93,7 +89,7 @@ namespace sch {
 			auto context() -> Plot;
 
 		private:
-			auto color() const -> Color;
+			auto color() const -> color;
 			void update_rect(
 				const std::vector<double>&,
 				const std::vector<double>&,
@@ -106,22 +102,4 @@ namespace sch {
 			static void add_to_legend(QCPAxisRect*,QCPAbstractPlottable*);
 	};
 
-	class Animation {
-		public:
-			using Action = std::function<bool(int,Figure&)>;
-			using ActionList
-				= std::vector<std::pair<Action,int>>;
-
-		private:
-			Figure     _figure;
-			ActionList _actions;
-
-		public:
-			Animation(int,char**,std::size_t,std::size_t);
-			/* ~Animation(); */
-
-			auto  start() -> int;
-			void init(const std::function<void(Figure&)>&);
-			void add (int msec, const Action&);
-	};
-}
+} /* end of namespace pcpp */
