@@ -31,13 +31,18 @@ target_compile_features(target-flags INTERFACE cxx_std_20)
 ##### BUILD #####
 #################
 
-qt5_wrap_cpp(moc_sources include/plotcpp/plotwidget.hpp)
+qt5_wrap_cpp(moc_sources
+	include/plotcpp/plotwidget.hpp
+	include/plotcpp/animation_widget.hpp
+)
 
 add_library(plotcpp SHARED
 	src/plotwidget.cpp
+	src/animation_widget.cpp
+
 	src/utils.cpp
-	# src/figure.cpp
-	# src/animation.cpp
+	src/figure.cpp
+	src/animation.cpp
 	${moc_sources}
 )
 target_include_directories(plotcpp
@@ -53,7 +58,15 @@ target_link_libraries(plotcpp
 
 add_library(plotcpp::plotcpp ALIAS plotcpp)
 
-foreach(app_name apps/plot.cpp) # apps/animation.cpp)
+file(GLOB
+	examples
+	apps/plot_widget.cpp
+	apps/animation_widget.cpp
+	apps/figure.cpp
+	apps/animation.cpp
+)
+
+foreach(app_name ${examples})
 	get_filename_component(bin_name ${app_name} NAME_WE)
 
 	add_executable(${bin_name} ${app_name})

@@ -1,15 +1,16 @@
-#include <plotcpp/animation.hpp>
+#include <plotcpp/animation_widget.hpp>
 
 #include <cmath>
 #include <iostream>
 #include <vector>
+
+#include <QApplication>
 
 int main(int argc, char** argv) {
 	double pi = std::atan(1)*4;
 	double f0 = 2.0;
 	double delta = 0.05;
 	int N = pi/delta;
-
 
 	auto setup = [pi, N, delta](pcpp::PlotWidget& f) -> void {
 		std::vector<double> x, y;
@@ -55,10 +56,12 @@ int main(int argc, char** argv) {
 		return true;
 	};
 
-	pcpp::Animation anim{argc, argv, 1, 1};
+	QApplication app{argc, argv};
+
+	pcpp::AnimationWidget anim{1, 1};
 	anim.init(setup);
 	anim.add(50, action);
 	anim.start();
 
-	return 0;
+	return app.exec();
 }

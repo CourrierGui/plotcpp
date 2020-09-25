@@ -1,26 +1,22 @@
 #pragma once
 
-#include <plotcpp/figure.hpp>
+#include <plotcpp/animation_widget.hpp>
 
 namespace pcpp {
 
-	class animation {
-		public:
-			using Action = std::function<bool(int,Figure&)>;
-			using ActionList
-				= std::vector<std::pair<Action,int>>;
-
+	class Animation {
 		private:
-			Figure     _figure;
-			ActionList _actions;
+			int                           _argc;
+			char**                        _argv;
+			std::shared_ptr<QApplication> _app;
+			AnimationWidget               _animation;
 
 		public:
 			Animation(int,char**,std::size_t,std::size_t);
 
-			auto  start() -> int;
-			void init(const std::function<void(Figure&)>&);
-			void add (int msec, const Action&);
+			int start();
+			void init(const std::function<void(PlotWidget&)>&);
+			void add (int msec, const AnimationWidget::Action&);
 	};
-
 
 } /* end of namespace pcpp */

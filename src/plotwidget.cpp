@@ -173,6 +173,11 @@ namespace pcpp {
 		}
 	}
 
+	void PlotWidget::update() {
+		_plot->replot();
+		_plot->update();
+	}
+
 	void PlotWidget::update_rect(
 		const std::vector<double>& x,
 		const std::vector<double>& y,
@@ -264,7 +269,11 @@ namespace pcpp {
 	void PlotWidget::range(const Range& r) {
 		auto* axis = get_axis();
 		axis->axis(QCPAxis::atBottom)->setRange(r.xmin, r.xmax);
-		axis->axis(QCPAxis::atLeft)->setRange(r.ymin, r.ymax);
+		axis->axis(QCPAxis::atLeft  )->setRange(r.ymin, r.ymax);
+	}
+
+	void PlotWidget::range(double xmin, double xmax, double ymin, double ymax) {
+		range({xmin, xmax, ymin, ymax});
 	}
 
 } /* end of namespace pcpp */
