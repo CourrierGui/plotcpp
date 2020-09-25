@@ -59,3 +59,5 @@ foreach(app_name apps/plot.cpp) # apps/animation.cpp)
 	add_executable(${bin_name} ${app_name})
 	target_link_libraries(${bin_name} Qt5::Widgets plotcpp::plotcpp )
 endforeach(app_name)
+
+# execute_process(COMMAND "ln -sf $(pwd)/compile_commands.json ..")

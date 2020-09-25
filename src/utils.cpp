@@ -4,6 +4,18 @@
 
 namespace pcpp {
 
+	static const std::array<QCPScatterStyle::ScatterShape,18> qcp_styles = {
+		QCPScatterStyle::ssNone,              QCPScatterStyle::ssDot,	
+		QCPScatterStyle::ssCross,	            QCPScatterStyle::ssPlus,	
+		QCPScatterStyle::ssCircle,	          QCPScatterStyle::ssDisc,	
+		QCPScatterStyle::ssSquare,	          QCPScatterStyle::ssDiamond,	
+		QCPScatterStyle::ssStar,	            QCPScatterStyle::ssTriangle,	
+		QCPScatterStyle::ssTriangleInverted,	QCPScatterStyle::ssCrossSquare,	
+		QCPScatterStyle::ssPlusSquare,	      QCPScatterStyle::ssCrossCircle,	
+		QCPScatterStyle::ssPlusCircle,	      QCPScatterStyle::ssPeace,
+		QCPScatterStyle::ssPixmap,            QCPScatterStyle::ssCustom,
+	};
+
 	Range::Range(double xmin, double xmax, double ymin, double ymax)
 		: xmin{xmin},xmax{xmax},ymin{ymin},ymax{ymax}
 	{
@@ -49,6 +61,24 @@ namespace pcpp {
 	}
 
 	Hist::Hist(QCPBars* data) : _data(data) {  }
+
+	void Hist::color(const Color& c) {
+		_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+	}
+
+	void Hist::color(int r, int g, int b) {
+		_data->setPen(QPen(QColor(r, g, b)));
+	}
+
+	auto Hist::get_color() -> Color {
+		auto c = _data->pen().color();
+		return {
+			static_cast<unsigned char>(c.red()),
+			static_cast<unsigned char>(c.green()),
+			static_cast<unsigned char>(c.blue())
+		};
+	}
+
 	Graph::Graph(QCPGraph* data) : _data(data) {  }
 
 	void Graph::color(const Color& c) {
@@ -66,6 +96,10 @@ namespace pcpp {
 			static_cast<unsigned char>(c.green()),
 			static_cast<unsigned char>(c.blue())
 		};
+	}
+
+	void Graph::style(const Style& st) {
+		_data->setScatterStyle(qcp_styles[static_cast<int>(st)]);
 	}
 
 } /* end of namespace pcpp */

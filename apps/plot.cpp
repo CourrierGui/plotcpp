@@ -17,25 +17,21 @@ int main(int argc, char** argv) {
 		y.push_back(std::sin(2*pi*f0*t));
 	}
 
-	pcpp::PlotWidget window{1, 1};
+	pcpp::PlotWidget plot_widget{1, 2};
 
-	window.title("Title");
-	window.xlabel("x 1");
-	window.ylabel("y 1");
-	window.range({0, 1, -1.1, 1.1});
-	window.legend();
+	plot_widget.title("Title");
+	plot_widget.xlabel("x 1");
+	plot_widget.ylabel("y 1");
+	plot_widget.range({0, 1, -1.1, 1.1});
+	plot_widget.legend();
 
-	auto plot = window.plot(x, y, "Plot");
+	auto plot = plot_widget.plot(x, y, "Plot");
 	plot.color(127, 54, 32);
-	/* plot.line_style(pcpp::Style::cross); */
-	/* auto hist = window.hist(x, y, "Histogram"); */
+	plot.style(pcpp::Style::cross);
+	plot_widget.at(0, 1);
+	auto hist = plot_widget.hist(x, y, "Histogram");
+	hist.color(127, 54, 32);
 
-	window.show();
+	plot_widget.show();
 	return app.exec();
 }
-
-
-	/* pcpp::figure f{argc, argv, 2, 2}; */
-
-
-	/* return f.show(); */
