@@ -48,6 +48,7 @@ namespace pcpp {
 			void clear();
 			void update();
 			auto widget() -> PlotWidget&;
+			void save(const std::string&, const Format& f=Format::png);
 	};
 
 } /* end of namespace pcpp */

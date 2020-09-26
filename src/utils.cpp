@@ -28,6 +28,7 @@ namespace pcpp {
 
 	}
 
+	//TODO improve this function
 	auto Color::next(std::size_t n) -> Color {
 		double h = 1.0/5.0*n;
 		double s = 0.5;

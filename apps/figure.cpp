@@ -3,17 +3,14 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
-#include <iostream>
-
-#include <QApplication>
 
 int main(int argc, char** argv) {
 
 	std::vector<double> x, y, b;
 	std::vector<int> t;
-	double pi = std::atan(1)*4;
-	double f0 = 3;
-	double delta = 1.0/1000;
+	const double pi = std::atan(1)*4;
+	const double f0 = 3;
+	const double delta = 1.0/1000;
 
 	for (double t=0; t<=1; t+=delta) {
 		x.push_back(t);
@@ -26,21 +23,24 @@ int main(int argc, char** argv) {
 
 	pcpp::Figure figure{argc, argv, 1, 2};
 
-	figure.title("Title");
-	figure.xlabel("x 1");
-	figure.ylabel("y 1");
-	/* figure.range({0, 1, -1.1, 1.1}); */
+	//TODO Problem when displaying too long titles
+	figure.title("Sin function");
+	figure.xlabel("x-axis");
+	figure.ylabel("y-axis");
 	figure.legend();
+	figure.range(-0.2, 1.2, -1.2, 1.2);
 
 	auto plot = figure.plot(x, y, "Plot");
 	plot.color(127, 54, 32);
 	plot.style(pcpp::Style::cross);
 
 	figure.at(0, 1);
+	figure.title("Quadratic histogram");
 	auto hist = figure.hist({t.begin(), t.end()}, b, "Histogram");
 	hist.color(127, 54, 32);
 	figure.legend();
 	figure.range(-0.5, 9.5, 0, *std::max_element(b.begin(), b.end())+1);
+	figure.save("images/double-figure.png", pcpp::Format::png);
 
 	return figure.show();
 }

@@ -9,17 +9,18 @@ namespace pcpp {
 		std::size_t rows, std::size_t cols,
 		QWidget* parent)
 		: QWidget{parent},
-		_plot{std::make_shared<QCustomPlot>(new QCustomPlot{this})},
+		_plot{std::make_shared<QCustomPlot>(this)},
 		_rows{rows}, _cols{cols},
 		_row{0},     _col{0},
 		_plots{}
 	{
-		QHBoxLayout* hlayout = new QHBoxLayout;
-		setLayout(hlayout);
-		hlayout->addWidget(&*_plot);
 		QCPLayoutGrid* layout = _plot->plotLayout();
 		layout->clear();
 		_plot->setAutoAddPlottableToLegend(false);
+
+		QHBoxLayout* hlayout = new QHBoxLayout;
+		setLayout(hlayout);
+		hlayout->addWidget(&*_plot);
 
 		for (std::size_t i=0; i<rows; ++i) {
 			for (std::size_t j=0; j<cols; ++j) {
@@ -274,6 +275,26 @@ namespace pcpp {
 
 	void PlotWidget::range(double xmin, double xmax, double ymin, double ymax) {
 		range({xmin, xmax, ymin, ymax});
+	}
+
+	void PlotWidget::save(const std::string& name,const Format& format) {
+		switch (format) {
+			case Format::png:
+				_plot->savePng(name.c_str(), 400, 400);
+				break;
+			case Format::jpg:
+				_plot->saveJpg(name.c_str());
+				break;
+			case Format::bmp:
+				_plot->saveBmp(name.c_str());
+				break;
+			case Format::rastered:
+				/* _plot->saveRastered(name.c_str()); */
+				break;
+			case Format::pdf:
+				_plot->savePdf(name.c_str());
+				break;
+		}
 	}
 
 } /* end of namespace pcpp */

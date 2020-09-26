@@ -50,4 +50,9 @@ namespace pcpp {
 		return QApplication::exec();
 	}
 
+	void Figure::save(const std::string& name, const Format& format) {
+		_plot.save(name, format);
+	}
+
+
 } /* end of namespace sch */

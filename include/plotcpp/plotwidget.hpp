@@ -49,6 +49,7 @@ namespace pcpp {
 			void legend();
 			void clear();
 			void update();
+			void save(const std::string&,const Format& f=Format::png);
 
 		private:
 			auto get_axis() const -> QCPAxisRect*;

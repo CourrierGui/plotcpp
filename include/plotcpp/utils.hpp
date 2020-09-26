@@ -44,6 +44,10 @@ namespace pcpp {
 		custom,
 	};
 
+	enum class Format {
+		png, jpg, pdf, bmp, rastered,
+	};
+
 	class Hist {
 		private:
 			QCPBars* _data;
