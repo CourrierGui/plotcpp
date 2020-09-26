@@ -60,6 +60,7 @@ add_library(plotcpp::plotcpp ALIAS plotcpp)
 
 file(GLOB
 	examples
+	apps/sin.cpp
 	apps/plot_widget.cpp
 	apps/animation_widget.cpp
 	apps/figure.cpp

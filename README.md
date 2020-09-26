@@ -1,6 +1,6 @@
 # Plotcpp
 
-**Plotcpp** is a simple library which provides some tools to quickly create plots in C++. It is build
+**Plotcpp** is a simple library which provides some tools to quickly create plots in C++. It is built
 on top of [qcustomplot 2.0](www.qcustomplot.com) and [Qt 5.15](qt.io/) but can be used
 independently in a project once compiled.
 
@@ -28,19 +28,19 @@ int main(int argc, char* argv[]) {
 		y.push_back(std::sin(2*pi*f0*t));
 	}
 
-	pcpp::Figure figure{argc, argv, 1, 2};
+	pcpp::Figure figure{argc, argv, 1, 1};
 
 	figure.title("Sin function");
 	figure.xlabel("x-axis");
 	figure.ylabel("y-axis");
 	figure.legend();
-	figure.range(-0.1, pi+0.1, -1.1, 1.1);
+	figure.range(-0.1, 1.1, -1.1, 1.1);
 
 	auto plot = figure.plot(x, y, "Plot");
 	plot.color(127, 54, 32);
 	plot.style(pcpp::Style::cross);
 	figure.save("images/sin.png", pcpp::Format::png);
-	return 0;
+	return figure.show();
 }
 ```
 
