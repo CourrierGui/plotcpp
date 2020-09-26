@@ -48,7 +48,8 @@ add_library(plotcpp SHARED
 )
 target_include_directories(plotcpp
 	PUBLIC
-		include
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 target_link_libraries(plotcpp
 	PRIVATE
@@ -61,15 +62,15 @@ add_library(plotcpp::plotcpp ALIAS plotcpp)
 
 file(GLOB
 	qt_examples
-	apps/plot_widget.cpp
-	apps/animation_widget.cpp
+	examples/plot_widget.cpp
+	examples/animation_widget.cpp
 )
 
 file(GLOB
 	examples
-	apps/sin.cpp
-	apps/figure.cpp
-	apps/animation.cpp
+	examples/sin.cpp
+	examples/figure.cpp
+	examples/animation.cpp
 )
 
 foreach(app_name ${qt_examples})
@@ -87,3 +88,55 @@ foreach(app_name ${examples})
 endforeach(app_name)
 
 # execute_process(COMMAND "ln -sf $(pwd)/compile_commands.json ..")
+
+#############################
+#### Configuration files ####
+#############################
+
+include(GNUInstallDirs)
+set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/plotcpp)
+
+#Create a ConfigVersion.cmake file
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfigVersion.cmake
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+configure_package_config_file(
+  ${CMAKE_CURRENT_LIST_DIR}/cmake/plotcppConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfig.cmake
+  INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+#####################
+####   INSTALL   ####
+#####################
+
+#Install the config, configversion and custom find modules
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfig.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfigVersion.cmake
+  DESTINATION ${INSTALL_CONFIGDIR}
+)
+
+install(EXPORT plotcpp-targets
+  FILE
+    plotcppTargets.cmake
+  NAMESPACE
+    plotcpp::
+  DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}/cmake/plotcpp
+)
+
+install(
+  TARGETS plotcpp
+  EXPORT plotcpp-targets
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+)
+install(
+  DIRECTORY include/plotcpp
+  DESTINATION include
+)

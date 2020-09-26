@@ -57,3 +57,27 @@ project using the default plot and animation windows created with the classes
 interact with the plot and save it.
 
 For more details about how to build plots, see the examples.
+
+## Installation
+
+To install the library, you have to install **Qt** and **qcustomplot**. Then do the following:
+
+```bash
+git clone https://github.com/CourrierGui/plotcpp
+cd plotcpp
+```
+
+### Compilation and installation
+
+```bash
+mkdir build
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+cmake --install build --prefix /usr
+```
+
+On Arch based distributions:
+
+```bash
+makepkg -si
+```
