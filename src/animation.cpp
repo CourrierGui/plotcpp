@@ -1,4 +1,5 @@
 #include <plotcpp/animation.hpp>
+#include <plotcpp/animation_widget.hpp>
 
 #include <QApplication>
 
@@ -9,22 +10,22 @@ namespace pcpp {
 		std::size_t rows, std::size_t cols)
 		: _argc{argc}, _argv{argv},
 			_app{new QApplication{_argc, _argv}},
-		_animation{rows, cols}
+		_animation{new AnimationWidget{rows, cols}}
 	{
 
 	}
 
-	void Animation::init(const std::function<void(PlotWidget&)>& setup) {
-		_animation.init(setup);
+	void Animation::init(const std::function<void(PlotWrapper&)>& setup) {
+		_animation->init(setup);
 	}
 
 	int Animation::start() {
-		_animation.start();
+		_animation->start();
 		return _app->exec();
 	}
 
-	void Animation::add(int msec, const AnimationWidget::Action& action) {
-		_animation.add(msec, action);
+	void Animation::add(int msec, const std::function<bool(int,PlotWrapper&)>& action) {
+		_animation->add(msec, action);
 	}
 
 } /* end of namespace pcpp */

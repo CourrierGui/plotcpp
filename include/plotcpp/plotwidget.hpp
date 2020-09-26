@@ -1,7 +1,5 @@
 #pragma once
 
-//TODO move the header file to src directory
-
 #include <plotcpp/utils.hpp>
 
 #include <QWidget>
@@ -15,7 +13,6 @@ namespace pcpp {
 		Q_OBJECT
 
 		public:
-			/* using GraphPtr = std::shared_ptr<Graph>; */
 			using QPlotPtr = std::shared_ptr<QCustomPlot>;
 
 		private:
@@ -50,6 +47,7 @@ namespace pcpp {
 			void clear();
 			void update();
 			void save(const std::string&,const Format& f=Format::png);
+			auto context() -> std::shared_ptr<QCustomPlot>;
 
 		private:
 			auto get_axis() const -> QCPAxisRect*;
@@ -60,7 +58,7 @@ namespace pcpp {
 				const std::vector<double>& y,
 				int dmin, int dmax
 			);
-			auto color() const -> Color;
+			auto color()      const -> Color;
 			auto get_layout() const -> QCPLayoutGrid*;
 			auto get_layout()       -> QCPLayoutGrid*;
 	};

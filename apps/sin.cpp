@@ -1,5 +1,7 @@
 #include <plotcpp/figure.hpp>
 
+#include <iostream>
+
 #include <vector>
 #include <cmath>
 #include <algorithm>
@@ -29,4 +31,3 @@ int main(int argc, char* argv[]) {
 	figure.save("images/sin.png", pcpp::Format::png);
 	return figure.show();
 }
-

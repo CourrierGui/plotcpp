@@ -297,4 +297,6 @@ namespace pcpp {
 		}
 	}
 
+	auto PlotWidget::context() -> std::shared_ptr<QCustomPlot> { return _plot; }
+
 } /* end of namespace pcpp */

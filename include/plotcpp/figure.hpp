@@ -2,7 +2,9 @@
 
 #include <string>
 #include <vector>
-#include <plotcpp/plotwidget.hpp>
+#include <memory>
+
+#include <plotcpp/utils.hpp>
 
 /*
  * TODO
@@ -11,14 +13,17 @@
  * so that you can modify the plot's options and replot after a plot.
  */
 
+class QApplication;
+
 namespace pcpp {
 
+	class PlotWidget;
 	class Figure {
 		private:
-			int           _argc;
-			char**        _argv;
-			QApplication* _app;
-			PlotWidget    _plot;
+			int                         _argc;
+			char**                      _argv;
+			QApplication*               _app;
+			std::shared_ptr<PlotWidget> _plot;
 
 		public:
 			Figure(int,char**,std::size_t=1,std::size_t=1);
@@ -47,7 +52,7 @@ namespace pcpp {
 			int  show();
 			void clear();
 			void update();
-			auto widget() -> PlotWidget&;
+			auto widget() -> std::shared_ptr<PlotWidget>&;
 			void save(const std::string&, const Format& f=Format::png);
 	};
 

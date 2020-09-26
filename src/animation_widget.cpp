@@ -1,7 +1,9 @@
 #include <plotcpp/animation_widget.hpp>
+#include <plotcpp/plotwidget.hpp>
 
 #include <QElapsedTimer>
 #include <QTimer>
+
 
 namespace pcpp {
 
@@ -13,7 +15,7 @@ namespace pcpp {
 
 	}
 
-	void AnimationWidget::init(const std::function<void(PlotWidget&)>& setup) {
+	void AnimationWidget::init(const std::function<void(PlotWrapper&)>& setup) {
 		setup(_plot);
 	}
 
@@ -32,7 +34,9 @@ namespace pcpp {
 
 			for (const auto& pair: _actions) {
 				auto time = pair.first;
-				auto* timer = new QTimer(&_plot);
+
+				auto* timer = new QTimer(_plot.context().get());
+
 				timer->setInterval(time);
 				timers.push_back(timer);
 			}

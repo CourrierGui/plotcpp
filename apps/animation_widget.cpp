@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 	double delta = 0.05;
 	int N = pi/delta;
 
-	auto setup = [pi, N, delta](pcpp::PlotWidget& f) -> void {
+	auto setup = [pi, N, delta](pcpp::PlotWrapper& f) -> void {
 		std::vector<double> x, y;
 		x.reserve(N);
 		y.reserve(N);
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 	};
 
 	// TODO: why can't the lambda capture variables by value ?
-	auto action = [](int time, pcpp::PlotWidget& f)
+	auto action = [](int time, pcpp::PlotWrapper& f)
 		-> bool
 	{
 		double f0 = 0.5;

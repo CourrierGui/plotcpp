@@ -38,6 +38,7 @@ qt5_wrap_cpp(moc_sources
 
 add_library(plotcpp SHARED
 	src/plotwidget.cpp
+	src/plotwrapper.cpp
 	src/animation_widget.cpp
 
 	src/utils.cpp
@@ -59,19 +60,30 @@ target_link_libraries(plotcpp
 add_library(plotcpp::plotcpp ALIAS plotcpp)
 
 file(GLOB
-	examples
-	apps/sin.cpp
+	qt_examples
 	apps/plot_widget.cpp
 	apps/animation_widget.cpp
+)
+
+file(GLOB
+	examples
+	apps/sin.cpp
 	apps/figure.cpp
 	apps/animation.cpp
 )
+
+foreach(app_name ${qt_examples})
+	get_filename_component(bin_name ${app_name} NAME_WE)
+
+	add_executable(${bin_name} ${app_name})
+	target_link_libraries(${bin_name} Qt5::Widgets plotcpp::plotcpp)
+endforeach(app_name)
 
 foreach(app_name ${examples})
 	get_filename_component(bin_name ${app_name} NAME_WE)
 
 	add_executable(${bin_name} ${app_name})
-	target_link_libraries(${bin_name} Qt5::Widgets plotcpp::plotcpp )
+	target_link_libraries(${bin_name} plotcpp::plotcpp)
 endforeach(app_name)
 
 # execute_process(COMMAND "ln -sf $(pwd)/compile_commands.json ..")
