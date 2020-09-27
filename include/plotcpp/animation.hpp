@@ -19,13 +19,13 @@ namespace pcpp {
 
 	class Animation {
 		private:
-			int                              _argc;
+			int&                             _argc;
 			char**                           _argv;
 			std::shared_ptr<QApplication>    _app;
 			std::shared_ptr<AnimationWidget> _animation;
 
 		public:
-			Animation(int,char**,std::size_t,std::size_t);
+			Animation(int&,char**,std::size_t,std::size_t);
 			Animation(const Animation&) = delete;
 			void operator=(const Animation&) = delete;
 

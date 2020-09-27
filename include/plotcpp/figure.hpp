@@ -18,15 +18,16 @@ class QApplication;
 namespace pcpp {
 
 	class PlotWidget;
+
 	class Figure {
 		private:
-			int                         _argc;
+			int&                        _argc;
 			char**                      _argv;
 			QApplication*               _app;
 			std::shared_ptr<PlotWidget> _plot;
 
 		public:
-			Figure(int,char**,std::size_t=1,std::size_t=1);
+			Figure(int&,char**,std::size_t=1,std::size_t=1);
 			Figure(const Figure&) = delete;
 			void operator=(const Figure&) = delete;
 

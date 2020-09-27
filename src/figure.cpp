@@ -3,12 +3,11 @@
 #include <plotcpp/plotwidget.hpp>
 
 #include <QApplication>
-#include <iostream>
 
 namespace pcpp {
 
 	Figure::Figure(
-		int argc, char** argv,
+		int& argc, char** argv,
 		std::size_t rows, std::size_t cols)
 	: _argc{argc}, _argv{argv},
 		_app{new QApplication{argc, argv}},

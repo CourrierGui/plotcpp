@@ -6,11 +6,11 @@
 namespace pcpp {
 
 	Animation::Animation(
-		int argc, char** argv,
+		int& argc, char** argv,
 		std::size_t rows, std::size_t cols)
 		: _argc{argc}, _argv{argv},
 			_app{new QApplication{_argc, _argv}},
-		_animation{new AnimationWidget{rows, cols}}
+			_animation{new AnimationWidget{rows, cols}}
 	{
 
 	}

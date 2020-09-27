@@ -10,7 +10,6 @@ int main(int argc, char** argv) {
 	double delta = 0.05;
 	int N = pi/delta;
 
-
 	auto setup = [pi, N, delta](pcpp::PlotWrapper& f) -> void {
 		std::vector<double> x, y;
 		x.reserve(N);
@@ -39,7 +38,6 @@ int main(int argc, char** argv) {
 		std::vector<double> x, y;
 		x.reserve(N);
 		y.reserve(N);
-		int var = 81732961;
 		double t = time / 1000.0;
 		double factor = std::cos(2*pi*f0*t);
 		for (int i=0; i<N; ++i) {
@@ -58,7 +56,6 @@ int main(int argc, char** argv) {
 	pcpp::Animation anim{argc, argv, 1, 1};
 	anim.init(setup);
 	anim.add(50, action);
-	anim.start();
 
-	return 0;
+	return anim.start();
 }

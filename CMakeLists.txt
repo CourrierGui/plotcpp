@@ -13,6 +13,7 @@ project(plotcpp
 )
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_CPPCHECK "cppcheck")
+# set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*")
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
@@ -86,6 +87,8 @@ foreach(app_name ${examples})
 	add_executable(${bin_name} ${app_name})
 	target_link_libraries(${bin_name} plotcpp::plotcpp)
 endforeach(app_name)
+
+add_subdirectory(doc)
 
 # execute_process(COMMAND "ln -sf $(pwd)/compile_commands.json ..")
 
