@@ -31,7 +31,7 @@ prepare() {
 
 build() {
 	cd "$pkgname-$pkgver"
-	cmake -B build -DCMAKE_BUILD_TYPE=Release
+	cmake -B build
 	cmake --build build
 }
 
