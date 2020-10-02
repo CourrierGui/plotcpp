@@ -69,10 +69,11 @@ namespace pcpp {
 
 	void Hist::color(int r, int g, int b) {
 		_data->setPen(QPen(QColor(r, g, b)));
+		_data->setBrush(QBrush(QColor(r, g, b)));
 	}
 
 	auto Hist::get_color() -> Color {
-		auto c = _data->pen().color();
+		auto c = _data->brush().color();
 		return {
 			static_cast<unsigned char>(c.red()),
 			static_cast<unsigned char>(c.green()),
