@@ -24,22 +24,28 @@ noextract=()
 md5sums=()
 validpgpkeys=()
 
+pkgver() {
+	cd "$srcdir/$pkgname"
+	echo "$pkgver.$(git rev-parse --short HEAD)"
+}
+
 prepare() {
-	git clone $url "$pkgname-$pkgver"
-	mkdir -p "$pkgname-$pkgver"/build
+	if [ -d "$srcdir/$pkgname/.git" ]
+	then
+		cd "$srcdir/$pkgname"; git pull origin master
+	else
+		git clone $url "$srcdir/$pkgname"
+	fi
+	mkdir -p "$srcdir/$pkgname/build"
 }
 
 build() {
-	cd "$pkgname-$pkgver"
-	cmake -B build
-	cmake --build build -DCMAKE_BUILD_TYPE=Release
-}
-
-check() {
-	cd "$pkgname-$pkgver"/build
+	cd "$srcdir/$pkgname"
+	cmake -B build -DCMAKE_BUILD_TYPE=Release
+	cmake --build build
 }
 
 package() {
-	cd "$pkgname-$pkgver"
+	cd "$srcdir/$pkgname"
 	cmake --install build --prefix "$pkgdir"/usr
 }
