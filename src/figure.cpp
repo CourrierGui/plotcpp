@@ -73,4 +73,6 @@ namespace pcpp {
 		_ui->_plot->save(name, format);
 	}
 
+	void Figure::noaxis() { _ui->_plot->noaxis(); }
+
 } /* end of namespace sch */

@@ -2,3 +2,5 @@ build
 release
 tags
 compile_commands.json
+.clangd
+images

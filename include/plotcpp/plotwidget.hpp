@@ -53,6 +53,7 @@ namespace pcpp {
 			void update();
 			void save(const std::string&,const Format& f=Format::png);
 			auto context() -> std::shared_ptr<QCustomPlot>;
+			void noaxis();
 
 		private:
 			auto get_axis() const -> QCPAxisRect*;

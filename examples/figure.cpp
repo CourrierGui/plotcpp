@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
 	figure.ylabel("y-axis");
 	figure.legend();
 	figure.range(-0.2, 1.2, -1.2, 1.2);
+	figure.noaxis();
 
 	auto text = figure.text(0.2, 0.5, "Hello!");
 	text.font("Source Code Pro", 15);

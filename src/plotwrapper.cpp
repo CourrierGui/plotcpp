@@ -58,5 +58,6 @@ void PlotWrapper::range(
 
 void PlotWrapper::show() { _plot->show(); }
 auto PlotWrapper::context() -> std::shared_ptr<PlotWidget> { return _plot; }
+void PlotWrapper::noaxis() { _plot->noaxis(); }
 
 } /* end of namespace pcpp */

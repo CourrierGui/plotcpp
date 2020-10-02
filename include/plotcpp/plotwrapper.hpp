@@ -47,6 +47,7 @@ namespace pcpp {
 			void save(const std::string&,const Format& f=Format::png);
 			void show();
 			auto context() -> std::shared_ptr<PlotWidget>;
+			void noaxis();
 	};
 
 } /* end of namespace pcpp */

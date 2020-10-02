@@ -322,6 +322,13 @@ namespace pcpp {
 		save(filename.toStdString(), pcpp::Format::png);
 	}
 
+	void PlotWidget::noaxis() {
+		auto* axis = get_axis();
+		for (auto* ax: axis->axes()) {
+			ax->setVisible(false);
+		}
+	}
+
 	auto PlotWidget::context() -> std::shared_ptr<QCustomPlot> { return _plot; }
 
 } /* end of namespace pcpp */
