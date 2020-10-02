@@ -7,12 +7,11 @@ namespace pcpp {
 
 	Animation::Animation(
 		int& argc, char** argv,
-		std::size_t rows, std::size_t cols)
+		int rows, int cols)
 		: _argc{argc}, _argv{argv},
 			_app{new QApplication{_argc, _argv}},
 			_animation{new AnimationWidget{rows, cols}}
 	{
-
 	}
 
 	void Animation::init(const std::function<void(PlotWrapper&)>& setup) {
@@ -24,7 +23,7 @@ namespace pcpp {
 		return _app->exec();
 	}
 
-	void Animation::add(int msec, const std::function<bool(int,PlotWrapper&)>& action) {
+	void Animation::add(int msec, const std::function<bool(int64_t,PlotWrapper&)>& action) {
 		_animation->add(msec, action);
 	}
 

@@ -71,7 +71,7 @@ cd plotcpp
 
 ```bash
 mkdir build
-cmake -B build
+cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 cmake --install build --prefix /usr
 ```

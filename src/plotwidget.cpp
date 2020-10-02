@@ -6,7 +6,7 @@
 namespace pcpp {
 
 	PlotWidget::PlotWidget(
-		std::size_t rows, std::size_t cols,
+		int rows, int cols,
 		QWidget* parent)
 		: QWidget{parent},
 		_plot{std::make_shared<QCustomPlot>(this)},
@@ -22,8 +22,8 @@ namespace pcpp {
 		setLayout(hlayout);
 		hlayout->addWidget(&*_plot);
 
-		for (std::size_t i=0; i<rows; ++i) {
-			for (std::size_t j=0; j<cols; ++j) {
+		for (int i=0; i<rows; ++i) {
+			for (int j=0; j<cols; ++j) {
 				auto* grid = new QCPLayoutGrid;
 				auto* text = new QCPTextElement(
 					&*_plot, "",
@@ -58,7 +58,7 @@ namespace pcpp {
 		);
 		_plots[graph] = "graph";
 
-		std::size_t index
+		int index
 			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
 		auto c = Color::next(index);
 		graph->setPen(QPen(QColor(c.r, c.g, c.b)));
@@ -80,21 +80,21 @@ namespace pcpp {
 		-> Hist
 	{
 		auto* axis = get_axis();
-		auto* data = new QCPBars(
+		auto* bars = new QCPBars(
 			axis->axis(QCPAxis::atBottom),
 			axis->axis(QCPAxis::atLeft)
 		);
-		_plots[data] = "bars";
+		_plots[bars] = "bars";
 
-		data->setAntialiased(false);
-		data->setName(label.c_str());
+		bars->setAntialiased(false);
+		bars->setName(label.c_str());
 
-		std::size_t index
+		int index
 			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
 		auto c = Color::next(index);
 
-		data->setPen(QPen(QColor(c.r, c.g, c.b)));
-		data->setBrush(QBrush(QColor(c.r, c.g, c.b)));
+		bars->setPen(QPen(QColor(c.r, c.g, c.b)));
+		bars->setBrush(QBrush(QColor(c.r, c.g, c.b)));
 
 		QVector<QString> labels;
 		QVector<double> ticks{x.begin(),x.end()};
@@ -103,11 +103,11 @@ namespace pcpp {
 		QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
 		textTicker->addTicks(ticks, labels);
 		axis->axis(QCPAxis::atBottom)->setTicker(textTicker);
-		data->setData(ticks, QVector<double>{y.begin(), y.end()});
+		bars->setData(ticks, QVector<double>{y.begin(), y.end()});
 
-		add_to_legend(axis, data);
+		add_to_legend(axis, bars);
 		_plot->rescaleAxes();
-		return Hist{data};
+		return Hist{bars};
 	}
 
 	auto PlotWidget::text(
@@ -127,7 +127,7 @@ namespace pcpp {
 		return {_text};
 	}
 
-	void PlotWidget::at(std::size_t row, std::size_t col) {
+	void PlotWidget::at(int row, int col) {
 		if (row < _rows && col < _cols) {
 			_row = row;
 			_col = col;
@@ -253,7 +253,7 @@ namespace pcpp {
 				static_cast<unsigned char>(256*b)
 			};
 		};
-		std::size_t index
+		int index
 			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
 		double h = 1.0/5*index;
 		return hsv_to_rgb(h, 0.5, 0.95);

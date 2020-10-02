@@ -11,14 +11,17 @@ namespace pcpp {
 
 	Figure::Figure(
 		int& argc, char** argv,
-		std::size_t rows, std::size_t cols)
+		int rows, int cols)
 	: _argc{argc}, _argv{argv},
 		_app{new QApplication{argc, argv}},
 		_ui{new Ui::Figure}, _widget{new QWidget}
 		/* _plot{new PlotWidget{rows, cols}} */
 	{
 		_ui->setupUi(rows, cols, _widget);
-		QObject::connect(_ui->_save, SIGNAL(clicked()), _ui->_plot, SLOT(screen_capture()));
+		QObject::connect(
+			_ui->_save, SIGNAL(clicked()),
+			_ui->_plot, SLOT(screen_capture())
+		);
 	}
 
 	Figure::~Figure() {
@@ -56,7 +59,7 @@ namespace pcpp {
 	void Figure::ylabel(const std::string& label)         { _ui->_plot->ylabel(label); }
 	void Figure::legend()                                 { _ui->_plot->legend();      }
 	void Figure::update()                                 { _ui->_plot->update();      }
-	void Figure::at(std::size_t row, std::size_t col)     { _ui->_plot->at(row, col);  }
+	void Figure::at(int row, int col)     { _ui->_plot->at(row, col);  }
 	auto Figure::widget() -> PlotWidget&                  { return *_ui->_plot;        }
 	void Figure::range(const Range& r)                    { _ui->_plot->range(r);      }
 

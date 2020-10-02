@@ -32,7 +32,7 @@ prepare() {
 build() {
 	cd "$pkgname-$pkgver"
 	cmake -B build
-	cmake --build build
+	cmake --build build -DCMAKE_BUILD_TYPE=Release
 }
 
 check() {

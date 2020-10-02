@@ -1,18 +1,19 @@
 #include <plotcpp/animation_widget.hpp>
 #include <plotcpp/plotwidget.hpp>
 
+#include <iostream>
+
 #include <QElapsedTimer>
 #include <QTimer>
-
 
 namespace pcpp {
 
 	AnimationWidget::AnimationWidget(
-		std::size_t rows, std::size_t cols,
+		int rows, int cols,
 		QWidget* parent)
-		: _plot{rows, cols, parent}, _actions{}
+		: _plot{rows, cols, parent}, _actions{},
+		_continue{true}, _qtime{new QElapsedTimer}
 	{
-
 	}
 
 	void AnimationWidget::init(const std::function<void(PlotWrapper&)>& setup) {
@@ -20,45 +21,33 @@ namespace pcpp {
 	}
 
 	void AnimationWidget::add(int msec, const Action& action) {
-		_actions.push_back({msec, action});
+		auto* timer = new QTimer{_plot.context().get()};
+		timer->setInterval(msec);
+		_actions.push_back({timer, action});
 	}
 
 	void AnimationWidget::start() {
-		bool _continue = true;
 		if (!_actions.empty()) {
-			auto* qtime = new QElapsedTimer;
-
-			// TODO make_timers private function
-			std::vector<QTimer*> timers;
-			timers.reserve(_actions.size());
-
-			for (const auto& pair: _actions) {
-				auto time = pair.first;
-
-				auto* timer = new QTimer(_plot.context().get());
-
-				timer->setInterval(time);
-				timers.push_back(timer);
-			}
-
 			auto action_it = _actions.begin();
-			auto timer_it = timers.begin();
-			while (action_it != _actions.end() && timer_it != timers.end()) {
-				auto action = (action_it++)->second;
-				auto* timer = *timer_it;
+			while (action_it != _actions.end()) {
+				auto action = action_it->second;
+				auto* timer = action_it->first;
 
-				if ((timer_it+1) != timers.end()) {
-					auto* next_timer = *(timer_it+1);
+				if ((action_it+1) != _actions.end()) {
+					auto* next_timer = (action_it+1)->first;
 					QObject::connect(
 						timer, &QTimer::timeout,
-						[this, action, &_continue, timer, next_timer, &qtime]()
+						[this, action, timer, next_timer]()
 						{
 							if (_continue) {
-								int time = qtime->elapsed();
+								int64_t time = _qtime->elapsed();
+								if (_qtime->isValid()) {
+								} else {
+								}
 								_continue = action(time, _plot);
 							} else {
 								timer->stop();
-								qtime->start();
+								_qtime->start();
 								_continue = true;
 								next_timer->start();
 							}
@@ -67,10 +56,10 @@ namespace pcpp {
 				} else {
 					QObject::connect(
 						timer, &QTimer::timeout,
-						[this, action, &_continue, timer, &qtime]()
+						[this, action, timer]()
 						{
 							if (_continue) {
-								int time = qtime->elapsed();
+								int64_t time = _qtime->elapsed();
 								_continue = action(time, _plot);
 							} else {
 								timer->stop();
@@ -79,13 +68,22 @@ namespace pcpp {
 						}
 					);
 				}
-				++timer_it;
+				++action_it;
 			}
-			timers.front()->start();
-			qtime->start();
+			auto* first_timer = new QTimer{_plot.context().get()};
+			first_timer->setInterval(5);
+			QObject::connect(
+				first_timer, &QTimer::timeout,
+				[first_timer, this]()
+				{
+					first_timer->stop();
+					_actions.front().first->start();
+					_qtime->start();
+				}
+			);
+			first_timer->start();
 		}
-		
 		_plot.show();
 	}
 
-} /* end of namespace */
+} /* end of namespace pcpp */

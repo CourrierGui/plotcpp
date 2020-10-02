@@ -34,7 +34,7 @@ namespace pcpp {
 			/* std::shared_ptr<PlotWidget> _plot; */
 
 		public:
-			Figure(int&,char**,std::size_t=1,std::size_t=1);
+			Figure(int&,char**,int=1,int=1);
 			Figure(const Figure&) = delete;
 			void operator=(const Figure&) = delete;
 			~Figure();
@@ -58,7 +58,7 @@ namespace pcpp {
 
 			void range(const Range&);
 			void range(double,double,double,double);
-			void at(std::size_t, std::size_t);
+			void at(int, int);
 			void title (const std::string&);
 			void xlabel(const std::string&);
 			void ylabel(const std::string&);

@@ -25,13 +25,16 @@ namespace pcpp {
 			std::shared_ptr<AnimationWidget> _animation;
 
 		public:
-			Animation(int&,char**,std::size_t,std::size_t);
+			Animation(int&,char**,int,int);
 			Animation(const Animation&) = delete;
 			void operator=(const Animation&) = delete;
 
 			int start();
 			void init(const std::function<void(PlotWrapper&)>&);
-			void add (int msec, const std::function<bool(int,PlotWrapper&)>&);
+			void add(
+				int msec,
+				const std::function<bool(int64_t,PlotWrapper&)>&
+			);
 	};
 
 } /* end of namespace pcpp */

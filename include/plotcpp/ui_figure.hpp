@@ -30,7 +30,7 @@ public:
     QPushButton *_save;
 
     void setupUi(
-			std::size_t rows, std::size_t cols,
+			int rows, int cols,
 			QWidget *Figure)
     {
         if (Figure->objectName().isEmpty())

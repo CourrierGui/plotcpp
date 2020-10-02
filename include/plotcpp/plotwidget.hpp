@@ -17,12 +17,12 @@ namespace pcpp {
 
 		private:
 			QPlotPtr    _plot;
-			std::size_t _rows, _cols;
-			std::size_t _row,  _col;
+			int         _rows, _cols;
+			int         _row,  _col;
 			std::map<QCPAbstractPlottable*, std::string> _plots;
 
 		public:
-			PlotWidget(std::size_t, std::size_t, QWidget* parent=0);
+			PlotWidget(int,int, QWidget* parent=0);
 			~PlotWidget();
 
 			auto plot(
@@ -44,7 +44,7 @@ namespace pcpp {
 
 			void range(const Range&);
 			void range(double,double,double,double);
-			void at(std::size_t, std::size_t);
+			void at(int,int);
 			void title (const std::string&);
 			void xlabel(const std::string&);
 			void ylabel(const std::string&);

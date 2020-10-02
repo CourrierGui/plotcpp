@@ -17,7 +17,7 @@ namespace pcpp {
 			std::shared_ptr<PlotWidget> _plot;
 
 		public:
-			PlotWrapper(std::size_t, std::size_t, QWidget* parent=0);
+			PlotWrapper(int, int, QWidget* parent=0);
 			auto plot(
 				const std::vector<double>&,
 				const std::vector<double>&,
@@ -37,7 +37,7 @@ namespace pcpp {
 
 			void range(const Range&);
 			void range(double,double,double,double);
-			void at(std::size_t, std::size_t);
+			void at(int, int);
 			void title (const std::string&);
 			void xlabel(const std::string&);
 			void ylabel(const std::string&);

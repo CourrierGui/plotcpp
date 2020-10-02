@@ -6,30 +6,33 @@ namespace pcpp {
 
 	static const std::array<QCPScatterStyle::ScatterShape,18> qcp_styles = {
 		QCPScatterStyle::ssNone,              QCPScatterStyle::ssDot,	
-		QCPScatterStyle::ssCross,	            QCPScatterStyle::ssPlus,	
-		QCPScatterStyle::ssCircle,	          QCPScatterStyle::ssDisc,	
-		QCPScatterStyle::ssSquare,	          QCPScatterStyle::ssDiamond,	
-		QCPScatterStyle::ssStar,	            QCPScatterStyle::ssTriangle,	
-		QCPScatterStyle::ssTriangleInverted,	QCPScatterStyle::ssCrossSquare,	
-		QCPScatterStyle::ssPlusSquare,	      QCPScatterStyle::ssCrossCircle,	
-		QCPScatterStyle::ssPlusCircle,	      QCPScatterStyle::ssPeace,
+		QCPScatterStyle::ssCross,	            QCPScatterStyle::ssPlus,
+		QCPScatterStyle::ssCircle,            QCPScatterStyle::ssDisc,
+		QCPScatterStyle::ssSquare,            QCPScatterStyle::ssDiamond,	
+		QCPScatterStyle::ssStar,              QCPScatterStyle::ssTriangle,
+		QCPScatterStyle::ssTriangleInverted,  QCPScatterStyle::ssCrossSquare,	
+		QCPScatterStyle::ssPlusSquare,        QCPScatterStyle::ssCrossCircle,	
+		QCPScatterStyle::ssPlusCircle,        QCPScatterStyle::ssPeace,
 		QCPScatterStyle::ssPixmap,            QCPScatterStyle::ssCustom,
 	};
 
-	Range::Range(double xmin, double xmax, double ymin, double ymax)
-		: xmin{xmin},xmax{xmax},ymin{ymin},ymax{ymax}
+	Range::Range(double _xmin, double _xmax, double _ymin, double _ymax)
+		: xmin{_xmin},xmax{_xmax},ymin{_ymin},ymax{_ymax}
 	{
 
 	}
 
-	Color::Color(unsigned char r,unsigned char g,unsigned char b)
-		: r{r}, g{g}, b{b}
+	Color::Color(
+		unsigned char _r,
+		unsigned char _g,
+		unsigned char _b)
+		: r{_r}, g{_g}, b{_b}
 	{
 
 	}
 
 	//TODO improve this function
-	auto Color::next(std::size_t n) -> Color {
+	auto Color::next(int n) -> Color {
 		double h = 1.0/5.0*n;
 		double s = 0.5;
 		double v = 0.95;
@@ -101,7 +104,7 @@ namespace pcpp {
 	}
 
 	void Graph::style(const Style& st) {
-		_data->setScatterStyle(qcp_styles[static_cast<int>(st)]);
+		_data->setScatterStyle(qcp_styles[static_cast<std::size_t>(st)]);
 	}
 
 	Text::Text(QCPItemText* data) : _data{data} {  }
