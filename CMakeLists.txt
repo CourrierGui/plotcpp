@@ -11,8 +11,9 @@ project(plotcpp
 	DESCRIPTION "Simple plot library"
 	LANGUAGES CXX
 )
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_CPPCHECK "cppcheck")
+# set(CMAKE_CXX_CPPCHECK "cppcheck")
 # set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*")
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -37,6 +38,9 @@ qt5_wrap_cpp(moc_sources
 	include/plotcpp/plotwidget.hpp
 	include/plotcpp/animation_widget.hpp
 )
+# qt5_wrap_ui(ui_wrap
+# 	ui/figure.ui OPTIONS --output "include/plotcpp/ui_figure.hpp"
+# )
 
 add_library(plotcpp SHARED
 	src/plotwidget.cpp
@@ -47,6 +51,7 @@ add_library(plotcpp SHARED
 	src/figure.cpp
 	src/animation.cpp
 	${moc_sources}
+	# ${ui_wrap}
 )
 target_include_directories(plotcpp
 	PUBLIC

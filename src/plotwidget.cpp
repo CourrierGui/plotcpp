@@ -110,6 +110,23 @@ namespace pcpp {
 		return Hist{data};
 	}
 
+	auto PlotWidget::text(
+		double x, double y,
+		const std::string& text)
+		-> Text
+	{
+		QCPItemText* _text = new QCPItemText{&*_plot};
+		_text->setClipAxisRect(get_axis());
+		_text->position->setType(QCPItemPosition::ptAxisRectRatio);
+		_text->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
+		_text->position->setCoords(x, y);
+		_text->setText(text.c_str());
+		_text->setTextAlignment(Qt::AlignLeft);
+		_text->setFont(QFont(font().family(), 14));
+		_text->setPadding(QMargins(8, 0, 0, 0));
+		return {_text};
+	}
+
 	void PlotWidget::at(std::size_t row, std::size_t col) {
 		if (row < _rows && col < _cols) {
 			_row = row;
@@ -295,6 +312,14 @@ namespace pcpp {
 				_plot->savePdf(name.c_str());
 				break;
 		}
+	}
+
+	void PlotWidget::screen_capture() {
+		QString filename = QFileDialog::getSaveFileName(
+			nullptr, tr("Save calibration file"), "",
+			tr("PNG (*.png)")
+		);
+		save(filename.toStdString(), pcpp::Format::png);
 	}
 
 	auto PlotWidget::context() -> std::shared_ptr<QCustomPlot> { return _plot; }

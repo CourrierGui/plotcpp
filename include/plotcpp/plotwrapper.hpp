@@ -30,6 +30,11 @@ namespace pcpp {
 				const std::string& label=""
 			) -> Hist;
 
+			auto text(
+				double,double,
+				const std::string& text
+			) -> Text;
+
 			void range(const Range&);
 			void range(double,double,double,double);
 			void at(std::size_t, std::size_t);

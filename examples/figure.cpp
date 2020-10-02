@@ -30,6 +30,8 @@ int main(int argc, char** argv) {
 	figure.legend();
 	figure.range(-0.2, 1.2, -1.2, 1.2);
 
+	auto text = figure.text(0.2, 0.5, "Hello!");
+	text.font("Source Code Pro", 15);
 	auto plot = figure.plot(x, y, "Plot");
 	plot.color(127, 54, 32);
 	plot.style(pcpp::Style::cross);

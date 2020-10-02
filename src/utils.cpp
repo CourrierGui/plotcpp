@@ -103,4 +103,10 @@ namespace pcpp {
 		_data->setScatterStyle(qcp_styles[static_cast<int>(st)]);
 	}
 
+	Text::Text(QCPItemText* data) : _data{data} {  }
+
+	void Text::font(const std::string& font_name, int size) {
+		_data->setFont(QFont(font_name.c_str(), size));
+	}
+
 } /* end of namespace pcpp */

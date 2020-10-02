@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 
 class QCustomPlot;
 class QCPAxisRect;
@@ -9,6 +10,7 @@ class QCPLayoutGrid;
 class QApplication;
 class QCPBars;
 class QCPGraph;
+class QCPItemText;
 
 namespace pcpp {
 
@@ -69,6 +71,14 @@ namespace pcpp {
 			auto get_color() -> Color;
 
 			void style(const Style&);
+	};
+
+	class Text {
+		private:
+			QCPItemText* _data;
+		public:
+			Text(QCPItemText* data);
+			void font(const std::string&, int);
 	};
 
 } /* end of namespace pcpp */

@@ -29,6 +29,12 @@ auto PlotWrapper::hist(
 	return _plot->hist(x, y, label);
 }
 
+auto PlotWrapper::text(double x, double y, const std::string& text)
+	-> Text
+{
+	return _plot->text(x, y, text);
+}
+
 void PlotWrapper::at(std::size_t row, std::size_t col) { _plot->at(row, col); }
 void PlotWrapper::title (const std::string& name)      { _plot->title(name);  }
 void PlotWrapper::xlabel(const std::string& name)      { _plot->xlabel(name); }

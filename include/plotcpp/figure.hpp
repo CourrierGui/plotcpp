@@ -14,6 +14,11 @@
  */
 
 class QApplication;
+class QWidget;
+
+namespace Ui {
+	class Figure;
+} /* end of namespace Ui */
 
 namespace pcpp {
 
@@ -24,12 +29,15 @@ namespace pcpp {
 			int&                        _argc;
 			char**                      _argv;
 			QApplication*               _app;
-			std::shared_ptr<PlotWidget> _plot;
+			Ui::Figure*                 _ui;
+			QWidget*                    _widget;
+			/* std::shared_ptr<PlotWidget> _plot; */
 
 		public:
 			Figure(int&,char**,std::size_t=1,std::size_t=1);
 			Figure(const Figure&) = delete;
 			void operator=(const Figure&) = delete;
+			~Figure();
 
 			auto plot(
 				const std::vector<double>&,
@@ -43,6 +51,11 @@ namespace pcpp {
 				const std::string& label=""
 			) -> Hist;
 
+			auto text(
+				double,double,
+				const std::string&
+			) -> Text;
+
 			void range(const Range&);
 			void range(double,double,double,double);
 			void at(std::size_t, std::size_t);
@@ -53,7 +66,7 @@ namespace pcpp {
 			int  show();
 			void clear();
 			void update();
-			auto widget() -> std::shared_ptr<PlotWidget>&;
+			auto widget() -> PlotWidget&;
 			void save(const std::string&, const Format& f=Format::png);
 	};
 
