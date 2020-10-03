@@ -113,7 +113,7 @@ endforeach(app_name)
 
 add_subdirectory(doc)
 
-# execute_process(COMMAND "ln -sf $(pwd)/compile_commands.json ..")
+# execute_process(COMMAND "ln -sf ${CMAKE_BUILD_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}")
 
 #############################
 #### Configuration files ####
