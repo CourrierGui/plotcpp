@@ -26,7 +26,8 @@ validpgpkeys=()
 
 pkgver() {
 	cd "$srcdir/$pkgname"
-	echo "$pkgver.$(git rev-parse --short HEAD)"
+	major=$(sed "s/\(\([0-9]\+\.\)\{2\}\([0-9]\)\+\)\.\?[0-9a-z]\+/\1/")
+	echo "$major.$(git rev-parse --short HEAD)"
 }
 
 prepare() {
