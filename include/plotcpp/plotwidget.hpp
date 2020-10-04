@@ -51,7 +51,7 @@ namespace pcpp {
 			void legend();
 			void clear();
 			void update();
-			void save(const std::string&,const Format& f=Format::png);
+			void save(const std::string&,const Format& f=Format::png, int whidth=0, int height=0);
 			auto context() -> std::shared_ptr<QCustomPlot>;
 			void noaxis();
 

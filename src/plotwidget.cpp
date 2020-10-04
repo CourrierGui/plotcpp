@@ -294,22 +294,22 @@ namespace pcpp {
 		range({xmin, xmax, ymin, ymax});
 	}
 
-	void PlotWidget::save(const std::string& name,const Format& format) {
+	void PlotWidget::save(const std::string& name, const Format& format, int width, int height) {
 		switch (format) {
 			case Format::png:
-				_plot->savePng(name.c_str(), 400, 400);
+				_plot->savePng(name.c_str(), width, height);
 				break;
 			case Format::jpg:
-				_plot->saveJpg(name.c_str());
+				_plot->saveJpg(name.c_str(), width, height);
 				break;
 			case Format::bmp:
-				_plot->saveBmp(name.c_str());
+				_plot->saveBmp(name.c_str(), width, height);
 				break;
 			case Format::rastered:
 				/* _plot->saveRastered(name.c_str()); */
 				break;
 			case Format::pdf:
-				_plot->savePdf(name.c_str());
+				_plot->savePdf(name.c_str(), width, height);
 				break;
 		}
 	}
