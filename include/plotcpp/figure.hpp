@@ -67,7 +67,7 @@ namespace pcpp {
 			void clear();
 			void update();
 			auto widget() -> PlotWidget&;
-			void save(const std::string&, const Format& f=Format::png);
+			void save(const std::string&, const Format& f=Format::png,int w=0, int h=0);
 			void noaxis();
 	};
 

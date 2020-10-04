@@ -72,8 +72,11 @@ namespace pcpp {
 		return QApplication::exec();
 	}
 
-	void Figure::save(const std::string& name, const Format& format) {
-		_ui->_plot->save(name, format);
+	void Figure::save(
+		const std::string& name, const Format& format,
+		int width, int height)
+	{
+		_ui->_plot->save(name, format, width,	height);
 	}
 
 	void Figure::noaxis() { _ui->_plot->noaxis(); }

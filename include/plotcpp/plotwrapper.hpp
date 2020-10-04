@@ -44,7 +44,7 @@ namespace pcpp {
 			void legend();
 			void clear();
 			void update();
-			void save(const std::string&,const Format& f=Format::png);
+			void save(const std::string&,const Format& f=Format::png,int w=0,int h=0);
 			void show();
 			auto context() -> std::shared_ptr<PlotWidget>;
 			void noaxis();

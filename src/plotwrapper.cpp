@@ -43,8 +43,11 @@ void PlotWrapper::legend()                             { _plot->legend();     }
 void PlotWrapper::clear()                              { _plot->clear();      }
 void PlotWrapper::update()                             { _plot->update();     }
 
-void PlotWrapper::save(const std::string& name, const Format& format) {
-	_plot->save(name, format);
+void PlotWrapper::save(
+	const std::string& name, const Format& format,
+	int width, int height)
+{
+	_plot->save(name, format, width, height);
 }
 
 void PlotWrapper::range(const Range& r) { _plot->range(r); }
