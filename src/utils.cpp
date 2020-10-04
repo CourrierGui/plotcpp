@@ -61,18 +61,19 @@ namespace pcpp {
 				static_cast<unsigned char>(256*g),
 				static_cast<unsigned char>(256*b)
 		};
-
 	}
 
 	Hist::Hist(QCPBars* data) : _data(data) {  }
 
-	void Hist::color(const Color& c) {
+	auto Hist::color(const Color& c) -> Hist& {
 		_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+		return *this;
 	}
 
-	void Hist::color(int r, int g, int b) {
+	auto Hist::color(int r, int g, int b) -> Hist& {
 		_data->setPen(QPen(QColor(r, g, b)));
 		_data->setBrush(QBrush(QColor(r, g, b)));
+		return *this;
 	}
 
 	auto Hist::get_color() -> Color {
@@ -86,12 +87,14 @@ namespace pcpp {
 
 	Graph::Graph(QCPGraph* data) : _data(data) {  }
 
-	void Graph::color(const Color& c) {
+	auto Graph::color(const Color& c) -> Graph& {
 		_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+		return *this;
 	}
 
-	void Graph::color(int r, int g, int b) {
+	auto Graph::color(int r, int g, int b) -> Graph& {
 		_data->setPen(QPen(QColor(r, g, b)));
+		return *this;
 	}
 
 	auto Graph::get_color() -> Color {
@@ -103,14 +106,16 @@ namespace pcpp {
 		};
 	}
 
-	void Graph::style(const Style& st) {
+	auto Graph::style(const Style& st) -> Graph& {
 		_data->setScatterStyle(qcp_styles[static_cast<std::size_t>(st)]);
+		return *this;
 	}
 
 	Text::Text(QCPItemText* data) : _data{data} {  }
 
-	void Text::font(const std::string& font_name, int size) {
+	auto Text::font(const std::string& font_name, int size) -> Text& {
 		_data->setFont(QFont(font_name.c_str(), size));
+		return *this;
 	}
 
 } /* end of namespace pcpp */

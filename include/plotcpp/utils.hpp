@@ -26,24 +26,13 @@ namespace pcpp {
 	};
 
 	enum class Style {
-		none,
-		dot,
-		cross,
-		plus,
-		circle,
-		disc,
-		square,
-		diamond,
-		star,
-		triangle,
-		triangle_inverted,
-		cross_square,
-		plus_square,
-		cross_circle,
-		plus_circle,
-		peace,
-		pixmap,
-		custom,
+		none, dot, cross,
+		plus, circle, disc,
+		square, diamond, star,
+		triangle, triangle_inverted,
+		cross_square, plus_square,
+		cross_circle, plus_circle,
+		peace, pixmap, custom,
 	};
 
 	enum class Format {
@@ -55,8 +44,8 @@ namespace pcpp {
 			QCPBars* _data;
 		public:
 			Hist(QCPBars* data);
-			void color(const Color&);
-			void color(int,int,int);
+			auto color(const Color&) -> Hist&;
+			auto color(int,int,int) -> Hist&;
 			auto get_color() -> Color;
 	};
 
@@ -65,12 +54,10 @@ namespace pcpp {
 			QCPGraph* _data;
 		public:
 			Graph(QCPGraph* data);
-
-			void color(const Color&);
-			void color(int,int,int);
+			auto color(const Color&) -> Graph&;
+			auto color(int,int,int) -> Graph&;
 			auto get_color() -> Color;
-
-			void style(const Style&);
+			auto style(const Style&) -> Graph&;
 	};
 
 	class Text {
@@ -78,7 +65,7 @@ namespace pcpp {
 			QCPItemText* _data;
 		public:
 			Text(QCPItemText* data);
-			void font(const std::string&, int);
+			auto font(const std::string&, int) -> Text&;
 	};
 
 } /* end of namespace pcpp */

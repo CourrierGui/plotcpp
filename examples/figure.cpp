@@ -33,9 +33,9 @@ int main(int argc, char** argv) {
 
 	auto text = figure.text(0.2, 0.5, "Hello!");
 	text.font("Source Code Pro", 15);
-	auto plot = figure.plot(x, y, "Plot");
-	plot.color(127, 54, 32);
-	plot.style(pcpp::Style::cross);
+	figure.plot(x, y, "Plot")
+		.color(127, 54, 32)
+		.style(pcpp::Style::cross);
 
 	figure.at(0, 1);
 	figure.title("Quadratic histogram");
