@@ -28,6 +28,6 @@ int main(int argc, char* argv[]) {
 	auto plot = figure.plot(x, y, "Plot");
 	plot.color(127, 54, 32);
 	plot.style(pcpp::Style::cross);
-	figure.save("images/sin.png", pcpp::Format::png);
+	figure.save("images/sin.png", pcpp::Format::png, 700, 450);
 	return figure.show();
 }
