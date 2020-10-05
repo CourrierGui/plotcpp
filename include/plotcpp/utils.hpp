@@ -36,6 +36,36 @@ namespace pcpp {
 		peace, pixmap, custom,
 	};
 
+	enum class Align {
+		top    = 1 << 0,
+		bottom = 1 << 1,
+		left   = 1 << 2,
+		center = 1 << 3,
+		right  = 1 << 4,
+	};
+	using AlignFlags = std::underlying_type_t <Align>;
+
+	inline AlignFlags operator|(Align lhs, Align rhs)
+	{
+		using T = std::underlying_type_t<Align>;
+		return static_cast<AlignFlags>(static_cast<T>(lhs) | static_cast<T>(rhs));
+	}
+	inline AlignFlags operator|(Align lhs, AlignFlags rhs)
+	{
+		using T = std::underlying_type_t<Align>;
+		return static_cast<AlignFlags>(static_cast<T>(lhs) | rhs);
+	}
+	inline AlignFlags operator|(AlignFlags lhs, Align rhs)
+	{
+		using T = std::underlying_type_t<Align>;
+		return static_cast<AlignFlags>(lhs | static_cast<T>(rhs));
+	}
+	inline bool operator& (AlignFlags lhs, Align rhs)
+	{
+		using T = std::underlying_type_t<Align>;
+		return lhs & static_cast<T>(rhs);
+	}
+
 	enum class Format {
 		png, jpg, pdf, bmp, rastered,
 	};
@@ -80,6 +110,7 @@ namespace pcpp {
 			auto rotate(double) -> Text&;
 			auto width() -> double;
 			auto height() -> double;
+			auto align(const AlignFlags&) -> Text&;
 	};
 
 } /* end of namespace pcpp */

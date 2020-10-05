@@ -7,6 +7,7 @@ file(GLOB
 file(GLOB
 	examples
 	sin.cpp
+	text.cpp
 	figure.cpp
 	animation.cpp
 )

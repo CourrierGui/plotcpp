@@ -20,7 +20,6 @@ namespace pcpp {
 	Range::Range(double _xmin, double _xmax, double _ymin, double _ymax)
 		: xmin{_xmin},xmax{_xmax},ymin{_ymin},ymax{_ymax}
 	{
-
 	}
 
 	double Color::h = 1/std::numbers::phi;
@@ -171,6 +170,23 @@ namespace pcpp {
 	auto Text::height() -> double {
 		return (_data->bottomRight->pixelPosition().y()
 					- _data->topRight->pixelPosition().y());
+	}
+
+	auto Text::align(const AlignFlags& a) -> Text& {
+		Qt::Alignment flags;
+		if (a & Align::bottom) {
+			flags = flags | Qt::AlignBottom;
+		} else if (a & Align::top) {
+			flags = flags | Qt::AlignTop;
+		} else if (a & Align::left) {
+			flags = flags | Qt::AlignLeft;
+		} else if (a & Align::center) {
+			flags = flags | Qt::AlignCenter;
+		} else if (a & Align::right) {
+			flags = flags | Qt::AlignRight;
+		}
+		_data->setTextAlignment(flags);
+		return *this;
 	}
 
 } /* end of namespace pcpp */
