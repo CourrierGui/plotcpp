@@ -17,6 +17,7 @@ namespace pcpp {
 	struct Color {
 		unsigned char r,g,b;
 		Color(unsigned char,unsigned char,unsigned char);
+		static double h;
 		static auto next(int,int) -> Color;
 	};
 

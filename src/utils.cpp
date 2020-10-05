@@ -1,4 +1,5 @@
 #include <utils.hpp>
+#include <numbers>
 
 #include <qcustomplot.h>
 
@@ -22,20 +23,25 @@ namespace pcpp {
 
 	}
 
+	double Color::h = 1/std::numbers::phi;
+
 	Color::Color(
 		unsigned char _r,
 		unsigned char _g,
 		unsigned char _b)
 		: r{_r}, g{_g}, b{_b}
 	{
-
 	}
 
 	//TODO improve this function
 	auto Color::next(int n, int size) -> Color {
-		double h = 1.0/size*n;
-		double s = 0.5;
-		double v = 0.95;
+		/* double h = 1.0/(size+2)*(n-1); */
+		h += 1/std::numbers::phi;
+		h = std::fmod(h, 1.0);
+		/* double s = 0.5; */
+		/* double v = 0.95; */
+		double s = 0.99;
+		double v = 0.99;
 
 		int h_i = static_cast<int>(6*h);
 		double f{h*6 - h_i};
@@ -47,8 +53,8 @@ namespace pcpp {
 		double g=0;
 		double b=0;
 		switch (h_i) {
-			case 0:  r=v, g=t, b=p; break;
-			case 1:  r=q, g=v, b=p; break;
+			case 0:  r=v,g=t,b=p; break;
+			case 1:  r=q,g=v,b=p; break;
 			case 2:  r=p,g=v,b=t; break;
 			case 3:  r=p,g=q,b=v; break;
 			case 4:  r=t,g=p,b=v; break;
@@ -58,8 +64,8 @@ namespace pcpp {
 
 		return Color{
 			static_cast<unsigned char>(256*r),
-				static_cast<unsigned char>(256*g),
-				static_cast<unsigned char>(256*b)
+			static_cast<unsigned char>(256*g),
+			static_cast<unsigned char>(256*b)
 		};
 	}
 
