@@ -38,10 +38,11 @@ namespace pcpp {
 	auto Figure::hist(
 		const std::vector<double>& x,
 		const std::vector<double>& y,
-		const std::string& label)
+		const std::string& label,
+		bool reversed)
 		-> Hist
 	{
-		return _ui->_plot->hist(x, y, label);
+		return _ui->_plot->hist(x, y, label, reversed);
 	}
 
 	auto Figure::text(

@@ -72,10 +72,10 @@ namespace pcpp {
 		int size
 			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
 		int index = 0;
-		for (auto* plot: axis->plottables()) {
-			auto c = Color::next(index, size);
-			plot->setPen(QPen(QColor(c.r, c.b, c.g)));
-		}
+		/* for (auto* plot: axis->plottables()) { */
+		/* } */
+		auto c = Color::next(index, size);
+		graph->setPen(QPen(QColor(c.r, c.b, c.g)));
 
 		return Graph{graph};
 	}
@@ -83,18 +83,30 @@ namespace pcpp {
 	auto PlotWidget::hist(
 		const std::vector<double>& x,
 		const std::vector<double>& y,
-		const std::string& label)
+		const std::string& label,
+		bool reversed)
 		-> Hist
 	{
 		auto* axis = get_axis();
-		auto* bars = new QCPBars(
-			axis->axis(QCPAxis::atBottom),
-			axis->axis(QCPAxis::atLeft)
-		);
+		QCPBars* bars = nullptr;
+
+		if (!reversed) {
+			bars = new QCPBars(
+				axis->axis(QCPAxis::atBottom),
+				axis->axis(QCPAxis::atLeft)
+			);
+		} else {
+			bars = new QCPBars(
+				axis->axis(QCPAxis::atLeft),
+				axis->axis(QCPAxis::atBottom)
+			);
+		}
 		_plots[bars] = "bars";
 
 		bars->setAntialiased(false);
-		bars->setName(label.c_str());
+		if (!label.empty()) {
+			bars->setName(label.c_str());
+		}
 
 		QVector<QString> labels;
 		QVector<double> ticks{x.begin(),x.end()};
@@ -111,11 +123,11 @@ namespace pcpp {
 		int size
 			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
 		int index = 0;
-		for (auto* plot: axis->plottables()) {
+		/* for (auto* plot: axis->plottables()) { */
 			auto c = Color::next(index, size);
-			plot->setBrush(QBrush(QColor(c.r, c.g, c.b)));
-			plot->setPen  (QPen  (QColor(c.r, c.g, c.b)));
-		}
+		bars->setBrush(QBrush(QColor(c.r, c.g, c.b)));
+		bars->setPen  (QPen  (QColor(c.r, c.g, c.b)));
+		/* } */
 
 		return Hist{bars};
 	}

@@ -23,10 +23,11 @@ auto PlotWrapper::plot(
 auto PlotWrapper::hist(
 	const std::vector<double>& x,
 	const std::vector<double>& y,
-	const std::string& label
+	const std::string& label,
+	bool reversed
 	) -> Hist
 {
-	return _plot->hist(x, y, label);
+	return _plot->hist(x, y, label, reversed);
 }
 
 auto PlotWrapper::text(double x, double y, const std::string& text)

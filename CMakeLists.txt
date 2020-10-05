@@ -63,22 +63,22 @@ set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/plotcpp)
 #Create a ConfigVersion.cmake file
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfigVersion.cmake
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion
+	${CMAKE_CURRENT_BINARY_DIR}/plotcppConfigVersion.cmake
+	VERSION ${PROJECT_VERSION}
+	COMPATIBILITY AnyNewerVersion
 )
 
 configure_package_config_file(
-  ${CMAKE_CURRENT_LIST_DIR}/cmake/plotcppConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfig.cmake
-  INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
+	${CMAKE_CURRENT_LIST_DIR}/cmake/plotcppConfig.cmake.in
+	${CMAKE_CURRENT_BINARY_DIR}/plotcppConfig.cmake
+	INSTALL_DESTINATION ${INSTALL_CONFIGDIR}
 )
 
 #####################
 ####   INSTALL   ####
 #####################
 
-#Install the config, configversion and custom find modules
+# Install the config, configversion and custom find modules
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfig.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/plotcppConfigVersion.cmake
@@ -86,21 +86,10 @@ install(FILES
 )
 
 install(EXPORT plotcpp-targets
-  FILE
-    plotcppTargets.cmake
-  NAMESPACE
-    plotcpp::
-  DESTINATION
-    ${CMAKE_INSTALL_LIBDIR}/cmake/plotcpp
-)
-
-install(
-  TARGETS plotcpp
-  EXPORT plotcpp-targets
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-)
-install(
-  DIRECTORY include/plotcpp
-  DESTINATION include
+	FILE
+		plotcppTargets.cmake
+	NAMESPACE
+		plotcpp::
+	DESTINATION
+		${CMAKE_INSTALL_LIBDIR}/cmake/plotcpp
 )

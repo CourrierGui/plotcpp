@@ -45,9 +45,15 @@ namespace pcpp {
 			QCPBars* _data;
 		public:
 			Hist(QCPBars* data);
+
+			auto get_color() -> Color;
+
 			auto color(const Color&) -> Hist&;
 			auto color(int,int,int) -> Hist&;
-			auto get_color() -> Color;
+			auto border(const Color&) -> Hist&;
+			auto border(int,int,int) -> Hist&;
+
+			auto width(double) -> Hist&;
 	};
 
 	class Graph {
@@ -67,6 +73,9 @@ namespace pcpp {
 		public:
 			Text(QCPItemText* data);
 			auto font(const std::string&, int) -> Text&;
+			auto color(const Color&) -> Text&;
+			auto color(int,int,int) -> Text&;
+			auto rotate(double) -> Text&;
 	};
 
 } /* end of namespace pcpp */

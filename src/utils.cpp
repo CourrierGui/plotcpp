@@ -72,13 +72,27 @@ namespace pcpp {
 	Hist::Hist(QCPBars* data) : _data(data) {  }
 
 	auto Hist::color(const Color& c) -> Hist& {
-		_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+		_data->setBrush(QBrush(QColor(c.r, c.g, c.b)));
 		return *this;
 	}
 
 	auto Hist::color(int r, int g, int b) -> Hist& {
-		_data->setPen(QPen(QColor(r, g, b)));
 		_data->setBrush(QBrush(QColor(r, g, b)));
+		return *this;
+	}
+
+	auto Hist::border(const Color& c) -> Hist& {
+		_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+		return *this;
+	}
+
+	auto Hist::border(int r, int g, int b) -> Hist& {
+		_data->setPen(QPen(QColor(r, g, b)));
+		return *this;
+	}
+
+	auto Hist::width(double width) -> Hist& {
+		_data->setWidth(width);
 		return *this;
 	}
 
@@ -121,6 +135,21 @@ namespace pcpp {
 
 	auto Text::font(const std::string& font_name, int size) -> Text& {
 		_data->setFont(QFont(font_name.c_str(), size));
+		return *this;
+	}
+
+	auto Text::color(const Color& c) -> Text& {
+		_data->setColor(QColor{c.r, c.g, c.b});
+		return *this;
+	}
+
+	auto Text::color(int r, int g, int b) -> Text& {
+		_data->setColor(QColor{r, g, b});
+		return *this;
+	}
+
+	auto Text::rotate(double degrees) -> Text& {
+		_data->setRotation(degrees);
 		return *this;
 	}
 

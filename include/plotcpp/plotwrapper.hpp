@@ -27,7 +27,8 @@ namespace pcpp {
 			auto hist(
 				const std::vector<double>&,
 				const std::vector<double>&,
-				const std::string& label=""
+				const std::string& label="",
+				bool reversed=false
 			) -> Hist;
 
 			auto text(

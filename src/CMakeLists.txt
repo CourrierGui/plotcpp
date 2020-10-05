@@ -1,7 +1,3 @@
-#################
-##### BUILD #####
-#################
-
 qt5_wrap_cpp(moc_sources
 	${CMAKE_SOURCE_DIR}/include/plotcpp/plotwidget.hpp
 	${CMAKE_SOURCE_DIR}/include/plotcpp/animation_widget.hpp
@@ -35,3 +31,15 @@ target_link_libraries(plotcpp
 )
 
 add_library(plotcpp::plotcpp ALIAS plotcpp)
+
+install(
+	TARGETS plotcpp
+	EXPORT plotcpp-targets
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+	PUBLIC_HEADER DESTINATION include/plotcpp
+)
+install(
+	DIRECTORY ${CMAKE_SOURCE_DIR}/include/plotcpp
+	DESTINATION include
+)
