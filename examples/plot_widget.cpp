@@ -1,4 +1,4 @@
-#include <plotcpp/plotwidget.hpp>
+#include <plotwidget.hpp>
 
 #include <vector>
 #include <cmath>

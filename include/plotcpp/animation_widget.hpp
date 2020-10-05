@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QWidget>
 
-#include <plotcpp/plotwrapper.hpp>
+#include <plotwrapper.hpp>
 
 class QTimer;
 class QElapsedTimer;

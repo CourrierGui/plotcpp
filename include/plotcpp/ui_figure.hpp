@@ -15,7 +15,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include <plotcpp/plotwidget.hpp>
+#include <plotwidget.hpp>
 
 #include <memory>
 

@@ -1,4 +1,4 @@
-#include <plotcpp/plotwidget.hpp>
+#include <plotwidget.hpp>
 
 #include <qcustomplot.h>
 #include <QHBoxLayout>
@@ -58,10 +58,8 @@ namespace pcpp {
 		);
 		_plots[graph] = "graph";
 
-		int index
-			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
-		auto c = Color::next(index);
-		graph->setPen(QPen(QColor(c.r, c.g, c.b)));
+		/* auto c = Color::next(index); */
+		/* graph->setPen(QPen(QColor(c.r, c.g, c.b))); */
 		graph->setData(
 			QVector<double>{x.begin(), x.end()},
 			QVector<double>{y.begin(), y.end()}
@@ -70,6 +68,15 @@ namespace pcpp {
 
 		add_to_legend(axis, graph);
 		_plot->rescaleAxes();
+
+		int size
+			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
+		int index = 0;
+		for (auto* plot: axis->plottables()) {
+			auto c = Color::next(index, size);
+			plot->setPen(QPen(QColor(c.r, c.b, c.g)));
+		}
+
 		return Graph{graph};
 	}
 
@@ -89,13 +96,6 @@ namespace pcpp {
 		bars->setAntialiased(false);
 		bars->setName(label.c_str());
 
-		int index
-			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
-		auto c = Color::next(index);
-
-		bars->setPen(QPen(QColor(c.r, c.g, c.b)));
-		bars->setBrush(QBrush(QColor(c.r, c.g, c.b)));
-
 		QVector<QString> labels;
 		QVector<double> ticks{x.begin(),x.end()};
 		for (const auto& val: x) { labels << QString::number(val); }
@@ -107,6 +107,16 @@ namespace pcpp {
 
 		add_to_legend(axis, bars);
 		_plot->rescaleAxes();
+
+		int size
+			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
+		int index = 0;
+		for (auto* plot: axis->plottables()) {
+			auto c = Color::next(index, size);
+			plot->setBrush(QBrush(QColor(c.r, c.g, c.b)));
+			plot->setPen  (QPen  (QColor(c.r, c.g, c.b)));
+		}
+
 		return Hist{bars};
 	}
 

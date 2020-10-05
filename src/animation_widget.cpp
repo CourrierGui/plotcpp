@@ -1,5 +1,5 @@
-#include <plotcpp/animation_widget.hpp>
-#include <plotcpp/plotwidget.hpp>
+#include <animation_widget.hpp>
+#include <plotwidget.hpp>
 
 #include <iostream>
 

@@ -1,4 +1,4 @@
-#include <plotcpp/animation.hpp>
+#include <animation.hpp>
 
 #include <cmath>
 #include <iostream>

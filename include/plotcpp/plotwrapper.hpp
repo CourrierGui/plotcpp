@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>
 
-#include <plotcpp/utils.hpp>
+#include <utils.hpp>
 
 class QWidget;
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-#include <plotcpp/utils.hpp>
+#include <utils.hpp>
 
 /*
  * TODO

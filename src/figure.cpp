@@ -1,11 +1,9 @@
-#include <plotcpp/figure.hpp>
-
-#include <plotcpp/plotwidget.hpp>
+#include <figure.hpp>
+#include <ui_figure.hpp>
+#include <plotwidget.hpp>
 
 #include <QApplication>
 #include <QWidget>
-
-#include <plotcpp/ui_figure.hpp>
 
 namespace pcpp {
 

@@ -1,5 +1,5 @@
-#include <plotcpp/animation.hpp>
-#include <plotcpp/animation_widget.hpp>
+#include <animation.hpp>
+#include <animation_widget.hpp>
 
 #include <QApplication>
 

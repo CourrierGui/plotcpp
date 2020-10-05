@@ -1,4 +1,4 @@
-#include <plotcpp/animation_widget.hpp>
+#include <animation_widget.hpp>
 
 #include <cmath>
 #include <iostream>

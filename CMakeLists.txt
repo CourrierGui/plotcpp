@@ -47,70 +47,8 @@ target_compile_options(target-flags
 )
 target_compile_features(target-flags INTERFACE cxx_std_20)
 
-#################
-##### BUILD #####
-#################
-
-qt5_wrap_cpp(moc_sources
-	include/plotcpp/plotwidget.hpp
-	include/plotcpp/animation_widget.hpp
-)
-# qt5_wrap_ui(ui_wrap
-# 	ui/figure.ui OPTIONS --output "include/plotcpp/ui_figure.hpp"
-# )
-
-add_library(plotcpp SHARED
-	src/plotwidget.cpp
-	src/plotwrapper.cpp
-	src/animation_widget.cpp
-
-	src/utils.cpp
-	src/figure.cpp
-	src/animation.cpp
-	${moc_sources}
-	# ${ui_wrap}
-)
-target_include_directories(plotcpp
-	PUBLIC
-    $<INSTALL_INTERFACE:include>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-)
-target_link_libraries(plotcpp
-	PRIVATE
-		Qt5::Widgets
-		qcustomplot
-		target-flags
-)
-
-add_library(plotcpp::plotcpp ALIAS plotcpp)
-
-file(GLOB
-	qt_examples
-	examples/plot_widget.cpp
-	examples/animation_widget.cpp
-)
-
-file(GLOB
-	examples
-	examples/sin.cpp
-	examples/figure.cpp
-	examples/animation.cpp
-)
-
-foreach(app_name ${qt_examples})
-	get_filename_component(bin_name ${app_name} NAME_WE)
-
-	add_executable(${bin_name} ${app_name})
-	target_link_libraries(${bin_name} Qt5::Widgets plotcpp::plotcpp)
-endforeach(app_name)
-
-foreach(app_name ${examples})
-	get_filename_component(bin_name ${app_name} NAME_WE)
-
-	add_executable(${bin_name} ${app_name})
-	target_link_libraries(${bin_name} plotcpp::plotcpp)
-endforeach(app_name)
-
+add_subdirectory(src)
+add_subdirectory(examples)
 add_subdirectory(doc)
 
 # execute_process(COMMAND "ln -sf ${CMAKE_BUILD_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}")

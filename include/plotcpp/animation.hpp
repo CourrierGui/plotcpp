@@ -6,8 +6,8 @@
 #include <vector>
 #include <string>
 
-#include <plotcpp/utils.hpp>
-#include <plotcpp/plotwrapper.hpp>
+#include <utils.hpp>
+#include <plotwrapper.hpp>
 
 class QApplication;
 class QWidget;

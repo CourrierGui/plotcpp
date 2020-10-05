@@ -1,4 +1,4 @@
-#include <plotcpp/figure.hpp>
+#include <figure.hpp>
 
 #include <vector>
 #include <cmath>

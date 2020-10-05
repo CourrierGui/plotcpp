@@ -1,6 +1,6 @@
 #pragma once
 
-#include <plotcpp/utils.hpp>
+#include <utils.hpp>
 
 #include <QWidget>
 #include <QObject>

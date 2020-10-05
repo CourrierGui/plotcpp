@@ -1,4 +1,4 @@
-#include <plotcpp/utils.hpp>
+#include <utils.hpp>
 
 #include <qcustomplot.h>
 
@@ -32,8 +32,8 @@ namespace pcpp {
 	}
 
 	//TODO improve this function
-	auto Color::next(int n) -> Color {
-		double h = 1.0/5.0*n;
+	auto Color::next(int n, int size) -> Color {
+		double h = 1.0/size*n;
 		double s = 0.5;
 		double v = 0.95;
 

@@ -1,5 +1,5 @@
-#include <plotcpp/plotwrapper.hpp>
-#include <plotcpp/plotwidget.hpp>
+#include <plotwrapper.hpp>
+#include <plotwidget.hpp>
 
 #include <QWidget>
 
