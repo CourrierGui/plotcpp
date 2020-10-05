@@ -140,12 +140,15 @@ namespace pcpp {
 		QCPItemText* _text = new QCPItemText{&*_plot};
 		_text->setClipAxisRect(get_axis());
 		_text->position->setType(QCPItemPosition::ptAxisRectRatio);
-		_text->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
+		_text->setPositionAlignment(Qt::AlignCenter|Qt::AlignBottom);
 		_text->position->setCoords(x, y);
 		_text->setText(text.c_str());
 		_text->setTextAlignment(Qt::AlignLeft);
 		_text->setFont(QFont(font().family(), 14));
-		_text->setPadding(QMargins(8, 0, 0, 0));
+		_text->setPadding(QMargins(0, 0, 0, 0));
+		_text->setClipToAxisRect(true);
+		_text->setClipAxisRect(get_axis());
+		/* std::clog << get_axis()->width() << ' ' << get_axis()->width() << '\n'; */
 		return {_text};
 	}
 
@@ -341,7 +344,9 @@ namespace pcpp {
 			nullptr, tr("Save calibration file"), "",
 			tr("PNG (*.png)")
 		);
-		save(filename.toStdString(), pcpp::Format::png);
+		if (!filename.isEmpty()) {
+			save(filename.toStdString(), pcpp::Format::png);
+		}
 	}
 
 	void PlotWidget::noaxis() {

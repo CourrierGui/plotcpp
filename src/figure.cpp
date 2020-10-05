@@ -52,15 +52,15 @@ namespace pcpp {
 		return _ui->_plot->text(x, y, text);
 	}
 
-	void Figure::title(const std::string& name)           { _ui->_plot->title(name);   }
-	void Figure::clear()                                  { _ui->_plot->clear();       }
-	void Figure::xlabel(const std::string& label)         { _ui->_plot->xlabel(label); }
-	void Figure::ylabel(const std::string& label)         { _ui->_plot->ylabel(label); }
-	void Figure::legend()                                 { _ui->_plot->legend();      }
-	void Figure::update()                                 { _ui->_plot->update();      }
-	void Figure::at(int row, int col)     { _ui->_plot->at(row, col);  }
-	auto Figure::widget() -> PlotWidget&                  { return *_ui->_plot;        }
-	void Figure::range(const Range& r)                    { _ui->_plot->range(r);      }
+	void Figure::title(const std::string& name)   { _ui->_plot->title(name);   }
+	void Figure::clear()                          { _ui->_plot->clear();       }
+	void Figure::xlabel(const std::string& label) { _ui->_plot->xlabel(label); }
+	void Figure::ylabel(const std::string& label) { _ui->_plot->ylabel(label); }
+	void Figure::legend()                         { _ui->_plot->legend();      }
+	void Figure::update()                         { _ui->_plot->update();      }
+	void Figure::at(int row, int col)             { _ui->_plot->at(row, col);  }
+	auto Figure::widget() -> PlotWidget&          { return *_ui->_plot;        }
+	void Figure::range(const Range& r)            { _ui->_plot->range(r);      }
 
 	void Figure::range(double xmin, double xmax, double ymin, double ymax) {
 		_ui->_plot->range(xmin, xmax, ymin, ymax);

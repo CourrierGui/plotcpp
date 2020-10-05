@@ -73,9 +73,13 @@ namespace pcpp {
 		public:
 			Text(QCPItemText* data);
 			auto font(const std::string&, int) -> Text&;
-			auto color(const Color&) -> Text&;
-			auto color(int,int,int) -> Text&;
+			auto color(const Color&)  -> Text&;
+			auto color(int,int,int)   -> Text&;
+			auto border(const Color&) -> Text&;
+			auto border(int,int,int)  -> Text&;
 			auto rotate(double) -> Text&;
+			auto width() -> double;
+			auto height() -> double;
 	};
 
 } /* end of namespace pcpp */

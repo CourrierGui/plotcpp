@@ -148,9 +148,29 @@ namespace pcpp {
 		return *this;
 	}
 
+	auto Text::border(const Color& c) -> Text& {
+		_data->setPen(QPen(QColor{c.r, c.g, c.b}));
+		return *this;
+	}
+
+	auto Text::border(int r, int g, int b) -> Text& {
+		_data->setPen(QPen(QColor{r, g, b}));
+		return *this;
+	}
+
 	auto Text::rotate(double degrees) -> Text& {
 		_data->setRotation(degrees);
 		return *this;
+	}
+
+	auto Text::width() -> double {
+		return (_data->topRight->pixelPosition().x()
+					- _data->topLeft->pixelPosition().x());
+	}
+
+	auto Text::height() -> double {
+		return (_data->bottomRight->pixelPosition().y()
+					- _data->topRight->pixelPosition().y());
 	}
 
 } /* end of namespace pcpp */
