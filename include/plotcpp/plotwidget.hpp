@@ -19,6 +19,7 @@ namespace pcpp {
 			QPlotPtr    _plot;
 			int         _rows, _cols;
 			int         _row,  _col;
+			ColorGen    _color_gen;
 			std::map<QCPAbstractPlottable*, std::string> _plots;
 
 		public:

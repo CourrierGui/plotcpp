@@ -14,11 +14,18 @@ class QCPItemText;
 
 namespace pcpp {
 
-	struct Color {
-		unsigned char r,g,b;
-		Color(unsigned char,unsigned char,unsigned char);
-		static double h;
-		static auto next(int,int) -> Color;
+	class Color {
+		public:
+			unsigned char r,g,b;
+			Color(unsigned char,unsigned char,unsigned char);
+	};
+
+	class ColorGen {
+		private:
+			double _h;
+		public:
+			ColorGen();
+			auto color() -> Color;
 	};
 
 	struct Range {
@@ -36,32 +43,31 @@ namespace pcpp {
 		peace, pixmap, custom,
 	};
 
-	enum class Align {
+	enum class Align : uint {
 		top    = 1 << 0,
 		bottom = 1 << 1,
 		left   = 1 << 2,
 		center = 1 << 3,
 		right  = 1 << 4,
 	};
-	using AlignFlags = std::underlying_type_t <Align>;
+	using AlignFlags = std::underlying_type_t<Align>;
 
-	inline AlignFlags operator|(Align lhs, Align rhs)
-	{
+	inline AlignFlags operator|(Align lhs, Align rhs) {
 		using T = std::underlying_type_t<Align>;
-		return static_cast<AlignFlags>(static_cast<T>(lhs) | static_cast<T>(rhs));
+		return static_cast<T>(lhs) | static_cast<T>(rhs);
 	}
-	inline AlignFlags operator|(Align lhs, AlignFlags rhs)
-	{
+
+	inline AlignFlags operator|(Align lhs, AlignFlags rhs) {
 		using T = std::underlying_type_t<Align>;
-		return static_cast<AlignFlags>(static_cast<T>(lhs) | rhs);
+		return static_cast<T>(lhs) | rhs;
 	}
-	inline AlignFlags operator|(AlignFlags lhs, Align rhs)
-	{
+
+	inline AlignFlags operator|(AlignFlags lhs, Align rhs) {
 		using T = std::underlying_type_t<Align>;
-		return static_cast<AlignFlags>(lhs | static_cast<T>(rhs));
+		return lhs | static_cast<T>(rhs);
 	}
-	inline bool operator& (AlignFlags lhs, Align rhs)
-	{
+
+	inline bool operator& (AlignFlags lhs, Align rhs) {
 		using T = std::underlying_type_t<Align>;
 		return lhs & static_cast<T>(rhs);
 	}

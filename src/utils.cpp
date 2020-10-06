@@ -22,8 +22,6 @@ namespace pcpp {
 	{
 	}
 
-	double Color::h = 1/std::numbers::phi;
-
 	Color::Color(
 		unsigned char _r,
 		unsigned char _g,
@@ -32,18 +30,20 @@ namespace pcpp {
 	{
 	}
 
+	ColorGen::ColorGen() : _h{1/std::numbers::phi} {  }
+
 	//TODO improve this function
-	auto Color::next(int n, int size) -> Color {
+	auto ColorGen::color() -> Color {
 		/* double h = 1.0/(size+2)*(n-1); */
-		h += 1/std::numbers::phi;
-		h = std::fmod(h, 1.0);
+		_h += 1/std::numbers::phi;
+		_h = std::fmod(_h, 1.0);
 		/* double s = 0.5; */
 		/* double v = 0.95; */
 		double s = 0.99;
 		double v = 0.99;
 
-		int h_i = static_cast<int>(6*h);
-		double f{h*6 - h_i};
+		int h_i = static_cast<int>(6*_h);
+		double f{_h*6 - h_i};
 		double p{v * (1 - s)};
 		double q{v * (1 - f*s)};
 		double t{v * (1 - (1 - f) * s)};
