@@ -44,11 +44,12 @@ namespace pcpp {
 	};
 
 	enum class Align : uint {
-		top    = 1 << 0,
-		bottom = 1 << 1,
-		left   = 1 << 2,
-		center = 1 << 3,
-		right  = 1 << 4,
+		bottom  = 1 << 0,
+		hcenter = 1 << 1,
+		top     = 1 << 2,
+		left    = 1 << 3,
+		center  = 1 << 4,
+		right   = 1 << 5,
 	};
 	using AlignFlags = std::underlying_type_t<Align>;
 

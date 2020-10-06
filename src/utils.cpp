@@ -176,13 +176,20 @@ namespace pcpp {
 		Qt::Alignment flags;
 		if (a & Align::bottom) {
 			flags = flags | Qt::AlignBottom;
-		} else if (a & Align::top) {
+		}
+		if (a & Align::top) {
 			flags = flags | Qt::AlignTop;
-		} else if (a & Align::left) {
+		}
+		if (a & Align::left) {
 			flags = flags | Qt::AlignLeft;
-		} else if (a & Align::center) {
+		}
+		if (a & Align::hcenter) {
+			flags = flags | Qt::AlignHCenter;
+		}
+		if (a & Align::center) {
 			flags = flags | Qt::AlignCenter;
-		} else if (a & Align::right) {
+		}
+		if (a & Align::right) {
 			flags = flags | Qt::AlignRight;
 		}
 		_data->setPositionAlignment(flags);
