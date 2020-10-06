@@ -3,6 +3,7 @@
 #include <utils.hpp>
 #include <shapes.hpp>
 #include <plotables.hpp>
+#include <items.hpp>
 
 #include <QWidget>
 #include <QObject>
@@ -50,10 +51,16 @@ namespace pcpp {
 				double, double,
 				const std::string&
 			) -> Text;
+
 			auto rect(
 				const Point& topLeft,
 				const Point& bottomRight
 			) -> Rectangle;
+
+			auto line(
+				const Point& topLeft,
+				const Point& bottomRight
+			) -> Line;
 
 			void range(const Range&);
 			void range(double,double,double,double);

@@ -160,6 +160,21 @@ namespace pcpp {
 		return {_rect};
 	}
 
+	auto PlotWidget::line(const Point& topLeft, const Point& bottomRight)
+		-> Line
+	{
+		auto* _line = new QCPItemLine{&*_plot};
+		auto* xaxis = get_axis()->axis(QCPAxis::atBottom);
+		auto* yaxis = get_axis()->axis(QCPAxis::atLeft);
+		_line->start->setType(QCPItemPosition::ptPlotCoords);
+		_line->end->setType(QCPItemPosition::ptPlotCoords);
+		_line->start->setAxes(xaxis, yaxis);
+		_line->end->setAxes(xaxis, yaxis);
+		_line->start->setCoords(topLeft.x, topLeft.y);
+		_line->end->setCoords(bottomRight.x, bottomRight.y);
+		return {_line};
+	}
+
 	void PlotWidget::at(int row, int col) {
 		if (row < _rows && col < _cols) {
 			_row = row;

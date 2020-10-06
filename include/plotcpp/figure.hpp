@@ -7,6 +7,7 @@
 #include <utils.hpp>
 #include <shapes.hpp>
 #include <plotables.hpp>
+#include <items.hpp>
 
 /*
  * TODO
@@ -62,6 +63,10 @@ namespace pcpp {
 			auto rect(
 				const Point&, const Point&
 			) -> Rectangle;
+
+			auto line(
+				const Point&, const Point&
+			) -> Line;
 
 			void range(const Range&);
 			void range(double,double,double,double);

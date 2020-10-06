@@ -58,6 +58,12 @@ namespace pcpp {
 		return _ui->_plot->rect(topLeft, bottomRight);
 	}
 
+	auto Figure::line(
+		const Point& start, const Point& stop) -> Line
+	{
+		return _ui->_plot->line(start, stop);
+	}
+
 	void Figure::title(const std::string& name)   { _ui->_plot->title(name);   }
 	void Figure::clear()                          { _ui->_plot->clear();       }
 	void Figure::xlabel(const std::string& label) { _ui->_plot->xlabel(label); }
