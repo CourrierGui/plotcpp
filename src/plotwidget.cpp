@@ -148,7 +148,6 @@ namespace pcpp {
 		_text->setPadding(QMargins(0, 0, 0, 0));
 		_text->setClipToAxisRect(true);
 		_text->setClipAxisRect(get_axis());
-		/* std::clog << get_axis()->width() << ' ' << get_axis()->width() << '\n'; */
 		return {_text};
 	}
 

@@ -185,7 +185,7 @@ namespace pcpp {
 		} else if (a & Align::right) {
 			flags = flags | Qt::AlignRight;
 		}
-		_data->setTextAlignment(flags);
+		_data->setPositionAlignment(flags);
 		return *this;
 	}
 
