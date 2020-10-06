@@ -13,6 +13,8 @@ add_library(plotcpp SHARED
 	animation_widget.cpp
 
 	utils.cpp
+	shapes.cpp
+	plotables.cpp
 	figure.cpp
 	animation.cpp
 	${moc_sources}

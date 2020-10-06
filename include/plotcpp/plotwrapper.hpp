@@ -5,6 +5,8 @@
 #include <memory>
 
 #include <utils.hpp>
+#include <shapes.hpp>
+#include <plotables.hpp>
 
 class QWidget;
 

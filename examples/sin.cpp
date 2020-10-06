@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	figure.range(-0.1, 1.1, -1.1, 1.1);
 
 	auto plot = figure.plot(x, y, "Plot");
-	plot.color(127, 54, 32);
+	plot.pen(127, 54, 32);
 	plot.style(pcpp::Style::cross);
 	figure.save("images/sin.png", pcpp::Format::png, 700, 450);
 	return figure.show();

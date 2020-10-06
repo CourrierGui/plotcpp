@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
 
 		f.clear();
 		auto plot = f.plot(x, y, "sin");
-		plot.color(30, 30, 30);
+		plot.pen(30, 30, 30);
 		f.range({x.front(), x.back(), -1, 1});
 		f.update();
 		return true;

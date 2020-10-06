@@ -26,11 +26,11 @@ int main(int argc, char** argv) {
 	plot_widget.legend();
 
 	auto plot = plot_widget.plot(x, y, "Plot");
-	plot.color(127, 54, 32);
+	plot.pen(127, 54, 32);
 	plot.style(pcpp::Style::cross);
 	plot_widget.at(0, 1);
 	auto hist = plot_widget.hist(x, y, "Histogram");
-	hist.color(127, 54, 32);
+	hist.brush(127, 54, 32);
 
 	plot_widget.show();
 	return app.exec();

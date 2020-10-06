@@ -1,11 +1,18 @@
 #pragma once
 
 #include <utils.hpp>
+#include <shapes.hpp>
+#include <plotables.hpp>
 
 #include <QWidget>
 #include <QObject>
 
 #include <memory>
+
+class QCustomPlot;
+class QCPAbstractPlottable;
+class QCPAxisRect;
+class QCPLayoutGrid;
 
 namespace pcpp {
 
@@ -53,7 +60,10 @@ namespace pcpp {
 			void legend();
 			void clear();
 			void update();
-			void save(const std::string&,const Format& f=Format::png, int whidth=0, int height=0);
+			void save(
+				const std::string&,const Format& f=Format::png,
+				int whidth=0, int height=0
+			);
 			auto context() -> std::shared_ptr<QCustomPlot>;
 			void noaxis();
 
