@@ -22,6 +22,8 @@ namespace pcpp {
 	{
 	}
 
+	Point::Point(double _x, double _y) : x{_x}, y{_y} {  }
+
 	Color::Color(
 		unsigned char _r,
 		unsigned char _g,

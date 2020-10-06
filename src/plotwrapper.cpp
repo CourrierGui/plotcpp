@@ -36,6 +36,12 @@ auto PlotWrapper::text(double x, double y, const std::string& text)
 	return _plot->text(x, y, text);
 }
 
+auto PlotWrapper::rect(const Point& topLeft, const Point& bottomRight)
+	-> Rectangle
+{
+	return _plot->rect(topLeft, bottomRight);
+}
+
 void PlotWrapper::at(int row, int col) { _plot->at(row, col); }
 void PlotWrapper::title (const std::string& name)      { _plot->title(name);  }
 void PlotWrapper::xlabel(const std::string& name)      { _plot->xlabel(name); }

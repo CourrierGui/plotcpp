@@ -24,6 +24,11 @@ namespace pcpp {
 		Range(double, double, double, double);
 	};
 
+	struct Point {
+		double x, y;
+		Point(double, double);
+	};
+
 	enum class Style {
 		none, dot, cross,
 		plus, circle, disc,

@@ -132,17 +132,32 @@ namespace pcpp {
 		-> Text
 	{
 		QCPItemText* _text = new QCPItemText{&*_plot};
-		_text->setClipAxisRect(get_axis());
-		_text->position->setType(QCPItemPosition::ptAxisRectRatio);
+		auto* xaxis = get_axis()->axis(QCPAxis::atBottom);
+		auto* yaxis = get_axis()->axis(QCPAxis::atLeft);
+		_text->position->setType(QCPItemPosition::ptPlotCoords);
+		_text->position->setAxes(xaxis, yaxis);
 		_text->setPositionAlignment(Qt::AlignCenter|Qt::AlignBottom);
 		_text->position->setCoords(x, y);
 		_text->setText(text.c_str());
 		_text->setTextAlignment(Qt::AlignLeft);
 		_text->setFont(QFont(font().family(), 14));
 		_text->setPadding(QMargins(0, 0, 0, 0));
-		_text->setClipToAxisRect(true);
-		_text->setClipAxisRect(get_axis());
 		return {_text};
+	}
+
+	auto PlotWidget::rect(const Point& topLeft, const Point& bottomRight)
+		-> Rectangle
+	{
+		QCPItemRect* _rect = new QCPItemRect{&*_plot};
+		auto* xaxis = get_axis()->axis(QCPAxis::atBottom);
+		auto* yaxis = get_axis()->axis(QCPAxis::atLeft);
+		_rect->topLeft->setType(QCPItemPosition::ptPlotCoords);
+		_rect->bottomRight->setType(QCPItemPosition::ptPlotCoords);
+		_rect->topLeft->setAxes(xaxis, yaxis);
+		_rect->bottomRight->setAxes(xaxis, yaxis);
+		_rect->topLeft->setCoords(topLeft.x, topLeft.y);
+		_rect->bottomRight->setCoords(bottomRight.x, bottomRight.y);
+		return {_rect};
 	}
 
 	void PlotWidget::at(int row, int col) {

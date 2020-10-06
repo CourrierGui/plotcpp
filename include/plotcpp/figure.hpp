@@ -59,6 +59,10 @@ namespace pcpp {
 				const std::string&
 			) -> Text;
 
+			auto rect(
+				const Point&, const Point&
+			) -> Rectangle;
+
 			void range(const Range&);
 			void range(double,double,double,double);
 			void at(int, int);

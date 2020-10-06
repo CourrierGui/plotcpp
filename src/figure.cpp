@@ -52,6 +52,12 @@ namespace pcpp {
 		return _ui->_plot->text(x, y, text);
 	}
 
+	auto Figure::rect(
+		const Point& topLeft, const Point& bottomRight) -> Rectangle
+	{
+		return _ui->_plot->rect(topLeft, bottomRight);
+	}
+
 	void Figure::title(const std::string& name)   { _ui->_plot->title(name);   }
 	void Figure::clear()                          { _ui->_plot->clear();       }
 	void Figure::xlabel(const std::string& label) { _ui->_plot->xlabel(label); }

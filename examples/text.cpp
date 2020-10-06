@@ -11,5 +11,9 @@ int main(int argc, char* argv[]) {
 	text.align(pcpp::Align::bottom|pcpp::Align::center);
 	text.color(0, 0, 0);
 
+	auto rect = f.rect({0.5, 0.5}, {0.6, 0.6});
+	rect.pen(0, 0, 0);
+	rect.brush(120, 120, 120);
+
 	return f.show();
 }
