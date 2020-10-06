@@ -12,7 +12,7 @@ namespace pcpp {
 		_plot{std::make_shared<QCustomPlot>(this)},
 		_rows{rows}, _cols{cols},
 		_row{0},     _col{0},
-		_plots{}
+		_color_gen{}, _plots{}
 	{
 		QCPLayoutGrid* layout = _plot->plotLayout();
 		layout->clear();
@@ -58,8 +58,6 @@ namespace pcpp {
 		);
 		_plots[graph] = "graph";
 
-		/* auto c = Color::next(index); */
-		/* graph->setPen(QPen(QColor(c.r, c.g, c.b))); */
 		graph->setData(
 			QVector<double>{x.begin(), x.end()},
 			QVector<double>{y.begin(), y.end()}
@@ -69,12 +67,10 @@ namespace pcpp {
 		add_to_legend(axis, graph);
 		_plot->rescaleAxes();
 
-		int size
-			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
-		int index = 0;
-		/* for (auto* plot: axis->plottables()) { */
-		/* } */
-		auto c = Color::next(index, size);
+		/* int size */
+		/* 	= get_axis()->axis(QCPAxis::atBottom)->plottables().size(); */
+		/* int index = 0; */
+		auto c = _color_gen.color();
 		graph->setPen(QPen(QColor(c.r, c.b, c.g)));
 
 		return Graph{graph};
@@ -120,14 +116,12 @@ namespace pcpp {
 		add_to_legend(axis, bars);
 		_plot->rescaleAxes();
 
-		int size
-			= get_axis()->axis(QCPAxis::atBottom)->plottables().size();
-		int index = 0;
-		/* for (auto* plot: axis->plottables()) { */
-			auto c = Color::next(index, size);
+		/* int size */
+		/* 	= get_axis()->axis(QCPAxis::atBottom)->plottables().size(); */
+		/* int index = 0; */
+		auto c = _color_gen.color();
 		bars->setBrush(QBrush(QColor(c.r, c.g, c.b)));
 		bars->setPen  (QPen  (QColor(c.r, c.g, c.b)));
-		/* } */
 
 		return Hist{bars};
 	}

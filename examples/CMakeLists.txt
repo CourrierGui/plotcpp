@@ -10,6 +10,7 @@ file(GLOB
 	text.cpp
 	figure.cpp
 	animation.cpp
+	colors.cpp
 )
 
 foreach(app_name ${qt_examples})
