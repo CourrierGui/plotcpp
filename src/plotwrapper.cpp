@@ -48,6 +48,14 @@ namespace pcpp {
 			return _plot->line(start, stop);
 		}
 
+	auto PlotWrapper::curve(
+		const Point& start, const Point& end,
+		const Point& startDir, const Point& endDir)
+		-> Curve
+		{
+			return _plot->curve(start, end, startDir, endDir);
+		}
+
 	void PlotWrapper::at(int row, int col) { _plot->at(row, col); }
 	void PlotWrapper::title (const std::string& name)      { _plot->title(name);  }
 	void PlotWrapper::xlabel(const std::string& name)      { _plot->xlabel(name); }

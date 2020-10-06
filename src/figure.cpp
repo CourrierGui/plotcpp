@@ -64,6 +64,14 @@ namespace pcpp {
 		return _ui->_plot->line(start, stop);
 	}
 
+	auto Figure::curve(
+		const Point& start,    const Point& end,
+		const Point& startDir, const Point& endDir)
+		-> Curve
+	{
+		return _ui->_plot->curve(start, end, startDir, endDir);
+	}
+
 	void Figure::title(const std::string& name)   { _ui->_plot->title(name);   }
 	void Figure::clear()                          { _ui->_plot->clear();       }
 	void Figure::xlabel(const std::string& label) { _ui->_plot->xlabel(label); }

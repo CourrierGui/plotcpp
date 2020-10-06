@@ -57,6 +57,11 @@ namespace pcpp {
 				const Point& bottomRight
 			) -> Rectangle;
 
+			auto curve(
+				const Point&, const Point&,
+				const Point&, const Point&
+			) -> Curve;
+
 			auto line(
 				const Point& topLeft,
 				const Point& bottomRight

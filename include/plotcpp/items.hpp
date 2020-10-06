@@ -3,6 +3,7 @@
 #include <utils.hpp>
 
 class QCPItemLine;
+class QCPItemCurve;
 
 namespace pcpp {
 	
@@ -13,18 +14,23 @@ namespace pcpp {
 	};
 
 	template<typename ItemPtr>
-		class ItemBase {
+		class LineBase {
 			public:
-				ItemBase(ItemPtr ptr);
+				LineBase(ItemPtr ptr);
+				auto head(const LineEnd&) -> LineBase<ItemPtr>&;
+				auto tail(const LineEnd&) -> LineBase<ItemPtr>&;
 			protected:
 				ItemPtr _data;
 		};
 
-	class Line : public ItemBase<QCPItemLine*> {
+	class Line : public LineBase<QCPItemLine*> {
 		public:
 			Line(QCPItemLine*);
-			auto head(const LineEnd&) -> Line&;
-			auto tail(const LineEnd&) -> Line&;
+	};
+
+	class Curve : public LineBase<QCPItemCurve*> {
+		public:
+			Curve(QCPItemCurve* data);
 	};
 
 } /* end of namespace pcpp */

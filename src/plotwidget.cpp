@@ -175,6 +175,34 @@ namespace pcpp {
 		return {_line};
 	}
 
+	auto PlotWidget::curve(
+		const Point& start,    const Point& end,
+		const Point& startDir, const Point& endDir)
+		-> Curve
+	{
+		auto* _curve = new QCPItemCurve{&*_plot};
+		auto* xaxis = get_axis()->axis(QCPAxis::atBottom);
+		auto* yaxis = get_axis()->axis(QCPAxis::atLeft);
+
+		_curve->start->setType(QCPItemPosition::ptPlotCoords);
+		_curve->start->setAxes(xaxis, yaxis);
+		_curve->start->setCoords(start.x, start.y);
+
+		_curve->end->setType(QCPItemPosition::ptPlotCoords);
+		_curve->end->setAxes(xaxis, yaxis);
+		_curve->end->setCoords(end.x, end.y);
+
+		_curve->endDir->setType(QCPItemPosition::ptPlotCoords);
+		_curve->endDir->setAxes(xaxis, yaxis);
+		_curve->endDir->setCoords(endDir.x, endDir.y);
+
+		_curve->startDir->setType(QCPItemPosition::ptPlotCoords);
+		_curve->startDir->setAxes(xaxis, yaxis);
+		_curve->startDir->setCoords(startDir.x, startDir.y);
+
+		return {_curve};
+	}
+
 	void PlotWidget::at(int row, int col) {
 		if (row < _rows && col < _cols) {
 			_row = row;

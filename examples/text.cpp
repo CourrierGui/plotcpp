@@ -1,5 +1,4 @@
 #include <figure.hpp>
-#include <shapes.hpp>
 
 int main(int argc, char* argv[]) {
 	pcpp::Figure f{argc, argv, 1, 1};
@@ -18,6 +17,9 @@ int main(int argc, char* argv[]) {
 
 	auto line = f.line({1.0, 1.0}, {2.0, 2.0});
 	line.head(pcpp::LineEnd::SpikeArrow);
+
+	auto curve = f.curve({2.0, 2.0}, {1.0, 1.0}, {1.5, 2.0}, {1.0, 1.5});
+	curve.head(pcpp::LineEnd::SpikeArrow);
 
 	f.range(0.0, 3.0, 0.0, 3.0);
 

@@ -68,6 +68,11 @@ namespace pcpp {
 				const Point&, const Point&
 			) -> Line;
 
+			auto curve(
+				const Point&, const Point&,
+				const Point&, const Point&
+			) -> Curve;
+
 			void range(const Range&);
 			void range(double,double,double,double);
 			void at(int, int);
