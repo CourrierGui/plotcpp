@@ -7,7 +7,6 @@ namespace pcpp {
 	template<typename ItemPtr>
 		LineBase<ItemPtr>::LineBase(ItemPtr ptr) : _data{ptr} {  }
 
-
 	template<typename ItemPtr>
 		auto LineBase<ItemPtr>::head(const LineEnd& end) -> LineBase<ItemPtr>& {
 			switch (end) {
@@ -73,6 +72,18 @@ namespace pcpp {
 					_data->setTail(QCPLineEnding::esSkewedBar);
 					break;
 			}
+			return *this;
+		}
+
+	template<typename ItemPtr>
+		auto LineBase<ItemPtr>::pen(const Color& c) -> LineBase<ItemPtr>& {
+			_data->setPen(QPen(QColor(c.r, c.g, c.b)));
+			return *this;
+		}
+
+	template<typename ItemPtr>
+		auto LineBase<ItemPtr>::pen(int r, int g, int b) -> LineBase<ItemPtr>& {
+			_data->setPen(QPen(QColor(r, g, b)));
 			return *this;
 		}
 

@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
 
 	auto curve = f.curve({2.0, 2.0}, {1.0, 1.0}, {1.5, 2.0}, {1.0, 1.5});
 	curve.head(pcpp::LineEnd::SpikeArrow);
+	curve.pen(120, 120, 120);
 
 	f.range(0.0, 3.0, 0.0, 3.0);
 

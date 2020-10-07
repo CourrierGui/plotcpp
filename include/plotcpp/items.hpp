@@ -19,6 +19,8 @@ namespace pcpp {
 				LineBase(ItemPtr ptr);
 				auto head(const LineEnd&) -> LineBase<ItemPtr>&;
 				auto tail(const LineEnd&) -> LineBase<ItemPtr>&;
+				auto pen(const Color&) -> LineBase<ItemPtr>&;
+				auto pen(int,int,int) -> LineBase<ItemPtr>&;
 			protected:
 				ItemPtr _data;
 		};
