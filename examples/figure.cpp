@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 	figure.at(0, 1);
 	figure.title("Quadratic histogram");
 	auto hist = figure.hist({t.begin(), t.end()}, b, "Histogram");
-	/* hist.color(127, 54, 32); */
+	hist.brush(127, 54, 32);
 	figure.legend();
 	figure.range(-0.5, 9.5, 0, *std::max_element(b.begin(), b.end())+1);
 	figure.save("images/double-figure.png", pcpp::Format::png);

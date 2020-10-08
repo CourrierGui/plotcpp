@@ -39,10 +39,10 @@ namespace pcpp {
 		/* double h = 1.0/(size+2)*(n-1); */
 		_h += 1/std::numbers::phi;
 		_h = std::fmod(_h, 1.0);
-		/* double s = 0.5; */
-		/* double v = 0.95; */
-		double s = 0.99;
-		double v = 0.99;
+		double s = 0.5;
+		double v = 0.95;
+		/* double s = 0.99; */
+		/* double v = 0.99; */
 
 		int h_i = static_cast<int>(6*_h);
 		double f{_h*6 - h_i};
