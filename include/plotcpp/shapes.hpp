@@ -10,34 +10,39 @@ class QCPItemRect;
 
 namespace pcpp {
 
-	template<typename ItemPtr>
-		class ShapeBase {
-			public:
-				ShapeBase(ItemPtr);
-				auto pen(const Color&)   -> ShapeBase<ItemPtr>&;
-				auto pen(int,int,int)    -> ShapeBase<ItemPtr>&;
-				auto brush(const Color&) -> ShapeBase<ItemPtr>&;
-				auto brush(int,int,int)  -> ShapeBase<ItemPtr>&;
+  template<typename ItemPtr, typename D>
+    class ShapeBase : public D {
+      public:
+        auto pen(const Color&)   -> D&;
+        auto pen(int,int,int)    -> D&;
+        auto brush(const Color&) -> D&;
+        auto brush(int,int,int)  -> D&;
+    };
 
-			protected:
-				ItemPtr _data;
-		};
+  class TextImpl {
+    public:
+      TextImpl(QCPItemText*);
+      auto width()  -> double;
+      auto height() -> double;
+      auto font(const std::string&, int) -> TextImpl&;
+      auto align(const AlignFlags&)      -> TextImpl&;
+      auto rotate(double)                -> TextImpl&;
+      auto color(const Color&)           -> TextImpl&;
+      auto color(int,int,int)            -> TextImpl&;
 
-	class Text : public ShapeBase<QCPItemText*> {
-		public:
-			Text(QCPItemText*);
-			auto font(const std::string&, int) -> Text&;
-			auto width() -> double;
-			auto height() -> double;
-			auto align(const AlignFlags&) -> Text&;
-			auto rotate(double) -> Text&;
-			auto color(const Color&) -> Text&;
-			auto color(int,int,int) -> Text&;
-	};
+    protected:
+      QCPItemText* _data;
+  };
 
-	class Rectangle : public ShapeBase<QCPItemRect*> {
-		public:
-			Rectangle(QCPItemRect*);
-	};
+  class RectangleImpl {
+    public:
+      RectangleImpl(QCPItemRect*);
+    protected:
+      QCPItemRect* _data;
+  };
+
+  using Rectangle = ShapeBase<QCPItemRect*, RectangleImpl>;
+  using Text = ShapeBase<QCPItemText*, TextImpl>;
+
 
 } /* end of namespace pcpp */

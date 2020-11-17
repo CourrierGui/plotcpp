@@ -6,33 +6,37 @@ class QCPItemLine;
 class QCPItemCurve;
 
 namespace pcpp {
-	
-	enum class LineEnd {
-		None, Disc, Diamond,
-		FlatArrow, SpikeArrow, LineArrow,
-		Bar, HalfBar, SkewedBar
-	};
 
-	template<typename ItemPtr>
-		class LineBase {
-			public:
-				LineBase(ItemPtr ptr);
-				auto head(const LineEnd&) -> LineBase<ItemPtr>&;
-				auto tail(const LineEnd&) -> LineBase<ItemPtr>&;
-				auto pen(const Color&) -> LineBase<ItemPtr>&;
-				auto pen(int,int,int) -> LineBase<ItemPtr>&;
-			protected:
-				ItemPtr _data;
-		};
+  enum class LineEnd {
+    None, Disc, Diamond,
+    FlatArrow, SpikeArrow, LineArrow,
+    Bar, HalfBar, SkewedBar
+  };
 
-	class Line : public LineBase<QCPItemLine*> {
-		public:
-			Line(QCPItemLine*);
-	};
+  template<typename ItemPtr, typename D>
+    class LineBase : public D {
+      public:
+        auto head(const LineEnd&) -> D&;
+        auto tail(const LineEnd&) -> D&;
+        auto pen(const Color&)    -> D&;
+        auto pen(int,int,int)     -> D&;
+    };
 
-	class Curve : public LineBase<QCPItemCurve*> {
-		public:
-			Curve(QCPItemCurve* data);
-	};
+  class LineImpl {
+    public:
+      LineImpl(QCPItemLine*);
+    protected:
+      QCPItemLine* _data;
+  };
+
+  class CurveImpl {
+    public:
+      CurveImpl(QCPItemCurve* data);
+    protected:
+      QCPItemCurve* _data;
+  };
+
+  using Curve = LineBase<QCPItemCurve*, CurveImpl>;
+  using Line  = LineBase<QCPItemLine*, LineImpl>;
 
 } /* end of namespace pcpp */
