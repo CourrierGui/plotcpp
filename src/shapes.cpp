@@ -6,25 +6,25 @@
 namespace pcpp {
 
   template<typename ItemPtr, typename D>
-    auto ShapeBase<ItemPtr, D>::pen(const Color& c) -> D& {
+    auto ShapeBase<ItemPtr, D>::pen(const Color& c) -> ShapeBase<ItemPtr,D>& {
       this->_data->setPen(QPen(QColor{c.r, c.g, c.b}));
       return *this;
     }
 
   template<typename ItemPtr, typename D>
-    auto ShapeBase<ItemPtr, D>::pen(int r, int g, int b) -> D& {
+    auto ShapeBase<ItemPtr, D>::pen(int r, int g, int b) -> ShapeBase<ItemPtr,D>& {
       this->_data->setPen(QPen(QColor{r, g, b}));
       return *this;
     }
 
   template<typename ItemPtr, typename D>
-    auto ShapeBase<ItemPtr, D>::brush(const Color& c) -> D& {
+    auto ShapeBase<ItemPtr, D>::brush(const Color& c) -> ShapeBase<ItemPtr,D>& {
       this->_data->setBrush(QBrush(QColor{c.r, c.g, c.b}));
       return *this;
     }
 
   template<typename ItemPtr, typename D>
-    auto ShapeBase<ItemPtr, D>::brush(int r, int g, int b) -> D& {
+    auto ShapeBase<ItemPtr, D>::brush(int r, int g, int b) -> ShapeBase<ItemPtr,D>& {
       this->_data->setBrush(QBrush(QColor{r, g, b}));
       return *this;
     }

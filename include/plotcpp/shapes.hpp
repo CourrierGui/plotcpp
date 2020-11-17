@@ -13,10 +13,10 @@ namespace pcpp {
   template<typename ItemPtr, typename D>
     class ShapeBase : public D {
       public:
-        auto pen(const Color&)   -> D&;
-        auto pen(int,int,int)    -> D&;
-        auto brush(const Color&) -> D&;
-        auto brush(int,int,int)  -> D&;
+        auto pen(const Color&)   -> ShapeBase<ItemPtr,D>&;
+        auto pen(int,int,int)    -> ShapeBase<ItemPtr,D>&;
+        auto brush(const Color&) -> ShapeBase<ItemPtr,D>&;
+        auto brush(int,int,int)  -> ShapeBase<ItemPtr,D>&;
     };
 
   class TextImpl {

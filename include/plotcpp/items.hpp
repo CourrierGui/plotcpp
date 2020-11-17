@@ -16,10 +16,10 @@ namespace pcpp {
   template<typename ItemPtr, typename D>
     class LineBase : public D {
       public:
-        auto head(const LineEnd&) -> D&;
-        auto tail(const LineEnd&) -> D&;
-        auto pen(const Color&)    -> D&;
-        auto pen(int,int,int)     -> D&;
+        auto head(const LineEnd&) -> LineBase<ItemPtr,D>&;
+        auto tail(const LineEnd&) -> LineBase<ItemPtr,D>&;
+        auto pen(const Color&)    -> LineBase<ItemPtr,D>&;
+        auto pen(int,int,int)     -> LineBase<ItemPtr,D>&;
     };
 
   class LineImpl {

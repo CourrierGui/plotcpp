@@ -10,16 +10,16 @@ int main(int argc, char* argv[]) {
   text.align(pcpp::Align::bottom|pcpp::Align::center);
   text.color(0, 0, 0);
 
-  auto rect = f.rect({0.0, 0.0}, {1.0, 1.0});
-  rect.pen(0, 0, 0);
-  rect.brush(120, 120, 120);
+  auto rect = f.rect({0.0, 0.0}, {1.0, 1.0})
+    .brush(120, 120, 120)
+    .pen(0, 0, 0);
 
   auto line = f.line({1.0, 1.0}, {2.0, 2.0});
   line.head(pcpp::LineEnd::SpikeArrow);
 
-  auto curve = f.curve({2.0, 2.0}, {1.0, 1.0}, {1.5, 2.0}, {1.0, 1.5});
-  curve.head(pcpp::LineEnd::SpikeArrow);
-  curve.pen(120, 120, 120);
+  auto curve = f.curve({2.0, 2.0}, {1.0, 1.0}, {1.5, 2.0}, {1.0, 1.5})
+    .head(pcpp::LineEnd::SpikeArrow)
+    .pen(120, 120, 120);
 
   f.range(0.0, 3.0, 0.0, 3.0);
 
