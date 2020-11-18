@@ -10,29 +10,28 @@ class QCPGraph;
 
 namespace pcpp {
 
-	template<typename PlotablePtr>
-		class PlotableBase {
-			public:
-				PlotableBase(PlotablePtr ptr);
-				auto pen(const Color&)   -> PlotableBase&;
-				auto pen(int,int,int)    -> PlotableBase&;
-				auto brush(const Color&) -> PlotableBase&;
-				auto brush(int,int,int)  -> PlotableBase&;
+  template<typename T, typename PtrType>
+    class PlotableBase {
+      public:
+        PlotableBase(PtrType);
+        auto pen(const Color&)   -> T&;
+        auto pen(int,int,int)    -> T&;
+        auto brush(const Color&) -> T&;
+        auto brush(int,int,int)  -> T&;
+    protected:
+        PtrType _data;
+    };
 
-			protected:
-				PlotablePtr _data;
-		};
+  class Hist : public PlotableBase<Hist,QCPBars*> {
+    public:
+      Hist(QCPBars* data);
+      auto width(double) -> Hist&;
+  };
 
-	class Hist : public PlotableBase<QCPBars*> {
-		public:
-			Hist(QCPBars* data);
-			auto width(double) -> Hist&;
-	};
-
-	class Graph : public PlotableBase<QCPGraph*> {
-		public:
-			Graph(QCPGraph* data);
-			auto style(const Style&) -> Graph&;
-	};
+    class Graph : public PlotableBase<Graph,QCPGraph*> {
+      public:
+        Graph(QCPGraph* data);
+        auto style(const Style&) -> Graph&;
+    };
 
 } /* end of namespace pcpp */

@@ -4,8 +4,11 @@
 
 namespace pcpp {
 
+  template<typename ItemPtr, typename D>
+    LineBase<ItemPtr,D>::LineBase(ItemPtr data) : _data{data} {  }
+
   template<typename ItemPtr,typename D>
-    auto LineBase<ItemPtr, D>::head(const LineEnd& end) -> LineBase<ItemPtr,D>& {
+    auto LineBase<ItemPtr, D>::head(const LineEnd& end) -> D& {
       switch (end) {
         case LineEnd::None:
           this->_data->setHead(QCPLineEnding::esNone);
@@ -35,11 +38,11 @@ namespace pcpp {
           this->_data->setHead(QCPLineEnding::esSkewedBar);
           break;
       }
-      return *this;
+      return *static_cast<D*>(this);
     }
 
   template<typename ItemPtr, typename D>
-    auto LineBase<ItemPtr,D>::tail(const LineEnd& end) -> LineBase<ItemPtr,D>& {
+    auto LineBase<ItemPtr,D>::tail(const LineEnd& end) -> D& {
       switch (end) {
         case LineEnd::None:
           this->_data->setTail(QCPLineEnding::esNone);
@@ -69,25 +72,32 @@ namespace pcpp {
           this->_data->setTail(QCPLineEnding::esSkewedBar);
           break;
       }
-      return *this;
+      return *static_cast<D*>(this);
     }
 
   template<typename ItemPtr,typename D>
-    auto LineBase<ItemPtr,D>::pen(const Color& c) -> LineBase<ItemPtr,D>& {
+    auto LineBase<ItemPtr,D>::pen(const Color& c) -> D& {
       this->_data->setPen(QPen(QColor(c.r, c.g, c.b)));
-      return *this;
+      return *static_cast<D*>(this);
     }
 
   template<typename ItemPtr,typename D>
-    auto LineBase<ItemPtr,D>::pen(int r, int g, int b) -> LineBase<ItemPtr,D>& {
+    auto LineBase<ItemPtr,D>::pen(int r, int g, int b) -> D& {
       this->_data->setPen(QPen(QColor(r, g, b)));
-      return *this;
+      return *static_cast<D*>(this);
     }
 
-  LineImpl::LineImpl  (QCPItemLine*  data) : _data{data} {  }
-  CurveImpl::CurveImpl(QCPItemCurve* data) : _data{data} {  }
+  Line::Line  (QCPItemLine*  data) : LineBase<QCPItemLine*,Line>{data} {  }
+  Curve::Curve(QCPItemCurve* data) : LineBase<QCPItemCurve*,Curve>{data} {  }
 
-  template class LineBase<QCPItemLine*,LineImpl>;
-  template class LineBase<QCPItemCurve*,CurveImpl>;
+  template auto LineBase<QCPItemCurve*,Curve>::head(const LineEnd&) -> Curve&;
+  template auto LineBase<QCPItemCurve*,Curve>::tail(const LineEnd&) -> Curve&;
+  template auto LineBase<QCPItemCurve*,Curve>::pen(const Color&) -> Curve&;
+  template auto LineBase<QCPItemCurve*,Curve>::pen(int,int,int) -> Curve&;
+
+  template auto LineBase<QCPItemLine*,Line>::head(const LineEnd&) -> Line&;
+  template auto LineBase<QCPItemLine*,Line>::tail(const LineEnd&) -> Line&;
+  template auto LineBase<QCPItemLine*,Line>::pen(const Color&) -> Line&;
+  template auto LineBase<QCPItemLine*,Line>::pen(int,int,int) -> Line&;
 
 } /* end of namespace pcpp */

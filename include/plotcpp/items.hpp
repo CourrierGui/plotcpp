@@ -14,29 +14,25 @@ namespace pcpp {
   };
 
   template<typename ItemPtr, typename D>
-    class LineBase : public D {
+    class LineBase {
       public:
-        auto head(const LineEnd&) -> LineBase<ItemPtr,D>&;
-        auto tail(const LineEnd&) -> LineBase<ItemPtr,D>&;
-        auto pen(const Color&)    -> LineBase<ItemPtr,D>&;
-        auto pen(int,int,int)     -> LineBase<ItemPtr,D>&;
+        LineBase(ItemPtr data);
+        auto head(const LineEnd&) -> D&;
+        auto tail(const LineEnd&) -> D&;
+        auto pen(const Color&)    -> D&;
+        auto pen(int,int,int)     -> D&;
+      protected:
+        ItemPtr _data;
     };
 
-  class LineImpl {
+  class Line : public LineBase<QCPItemLine*,Line> {
     public:
-      LineImpl(QCPItemLine*);
-    protected:
-      QCPItemLine* _data;
+      Line(QCPItemLine*);
   };
 
-  class CurveImpl {
+  class Curve : public LineBase<QCPItemCurve*,Curve> {
     public:
-      CurveImpl(QCPItemCurve* data);
-    protected:
-      QCPItemCurve* _data;
+      Curve(QCPItemCurve* data);
   };
-
-  using Curve = LineBase<QCPItemCurve*, CurveImpl>;
-  using Line  = LineBase<QCPItemLine*, LineImpl>;
 
 } /* end of namespace pcpp */
